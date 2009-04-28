@@ -1,0 +1,220 @@
+\documentclass[]{jarticle}
+\usepackage{ascmac}
+%%% 上下 3cm,  左右 2cm の余白を定義します %%%
+\paperwidth  597pt
+\paperheight 845pt
+\hoffset   -14.0pt
+\voffset    14.5pt
+ \oddsidemargin 0.0pt
+ \evensidemargin 0.0pt
+ \topmargin     0.0pt
+ \headheight    0.0pt
+ \headsep       0.0pt
+\textheight 659.0pt 
+%\textheight 671.0pt 
+\textwidth  480.5pt
+ \marginparsep   0.0pt
+ \marginparwidth 0.0pt
+\footskip 1.0cm 
+
+\renewcommand{\footnoterule}{
+\vspace{0.5pt}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{-0.5pt}
+}
+
+\title{2009年度シラバスシステム\\内部設計書}
+\author{岡崎 浩和}
+\西暦
+\date{\today}
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+\newpage
+\section{本書について}
+本書は2009年度のシラバスシステムの内部設計書である。
+\section{システム構成図}
+岡山県立大学シラバス管理システム2009システム管理図.pdfを参照。
+\section{プログラム情報}
+\subsection{プログラム構成}
+以下に、シラバスシステムの各種プログラムファイルと機能の概要を示す。
+\subsubsection{change\_pass.php}
+パスワードの変更を行います。
+\subsubsection{delete\_class.php}
+科目の削除を行います。
+\subsubsection{chown\_class.php}
+科目を所有している教員の変更を行います。
+\subsubsection{delete\_user.php}
+教員の削除を行います。
+\subsubsection{edit.php}
+シラバスの編集画面の表示からxmlファイル・texファイル・pdfファイルの生成までを行います。
+\subsubsection{index.php}
+シラバスシステムのindexの表示を行います。
+\subsubsection{regist\_class.php}
+科目の登録を行います。
+\subsubsection{regist\_user.php}
+教員の登録を行います。
+\subsubsection{replacetext.php}
+問題が発生する特殊文字の置換を行います。
+\subsubsection{str2otf}
+各文字をotfでのUTF-8の表示方法である\verb"\UTF？？？？"という形式に変換します。
+\subsubsection{syllabus\_pdf.xsl}
+シラバスのxmlファイルから\TeX の形式に変換うするためのxslが記述されています。
+\subsubsection{use.html}
+使い方・注意事項のページのhtmlです。
+\subsubsection{view\_all\_class.php}
+科目一覧の表示を行います。
+\subsubsection{view\_user\_class.php}
+各教員の科目一覧の表示を行います。
+\subsubsection{session\_start.inc}
+セッションの開始します。
+\subsubsection{session\_check.inc}
+セッションファイルが存在しない場合、トップページへ戻ります。
+\subsubsection{session\_end.inc}
+セッションファイルを削除します。
+\subsubsection{value.inc}
+各ディレクトリと学科の対応や定数が定義されています。
+\subsection{データファイル構成}
+本章では、システムがデータの格納や処理を行うファイルとディレクトリの構成について示す。
+\subsubsection{dataディレクトリ}
+dataディレクトリには実際に作成されたデータが格納されています。
+
+dataディレクトリ以下には各学科毎のディレクトリがあり、各学科のディレクトリの内部はpdfディレクトリ・workdirディレクトリ・xmlディレクトリに分かれています。
+各学科名とディレクトリとの対応はvalue.incに記述されています。
+\subsubsection{data/****/xmlディレクトリ}
+xmlディレクトリには入力画面で入力された各科目の情報が科目毎に保存されています。
+\subsubsection{data/****/workdirディレクトリ}
+xmlディレクトリに格納されたデータをもとにtexファイルを作成し、組み版する作業ディレクトリです。
+
+\subsubsection{data/****/pdfディレクトリ}
+生成されたpdfファイルが保存されるディレクトリです。
+
+\subsubsection{cssディレクトリ}
+\subsubsection{maintenance.css}
+change\_pass.php,chown\_class.php,delete\_class.php,delete\_user.php,regist\_class.php,regist\_user.php
+で使用しているcssファイルです。
+\subsubsection{edit.css}
+edit.phpで使用しているcssファイルです。
+\subsubsection{top.css}
+index.phpで使用しているcssファイルです。
+\subsubsection{SCS.css}
+view\_all\_class.phpと、view\_user\_class.phpで使用しているcssファイルです。
+\subsubsection{use.css}
+use.htmlで使用しているcssファイルです。
+\section{プログラムソース}
+\subsection{ユーザ定義関数とその機能,入出力}
+\subsubsection{change\_pass.php}
+\subsubsection{make\_crypted\_pass()}
+暗号化されたパスワードをパスワードリストファイルに追加します。
+\subsubsection{html\_out()}
+パスワード変更が正常に完了したことをユーザーに伝えるページを表示します。
+\subsubsection{error()}
+引数 error\_flag パスワード入力の際にエラーが発生した場合にエラー内容を
+ユーザーに伝えるページを表示します。
+
+\subsubsection{chown\_class.php}
+\subsubsection{select\_page(\$selectclass, \$depart)}
+引数 selectclass 所有者を変更したい科目\\
+depart 学科名\\
+所有者を変更するページを表示します。
+
+\subsubsection{change\_page()}
+所有者を変更し、dataフォルダのファイルを変更します。
+
+\subsubsection{make\_teacher\_list()}
+ある科目の所有者を変更した後で、その教員が所有している科目のリストを表示します。
+
+\subsubsection{delete\_user.php}
+\subsubsection{make\_teacher\_list()}
+ある使用者を削除したのち、rootを除いた使用者のリストを表示します。
+
+\subsubsection{edit.php}
+\subsubsection{write()}
+フォームに記述されたデータをPOSTで受け取り、XMLファイルに書き込みます。
+
+\subsubsection{binarycheck()}
+XMLで使用できる文字コードにエンコーディングします。
+
+\subsubsection{write\_print\_double(\$str)}
+引数 str XMLファイルに書き込む文字列\\
+???
+
+\subsubsection{ed()}
+シラバスの編集ページを表示します。
+
+\subsubsection{changelist(\$name\_ja, \$endtype)}
+引数 name\_ja 担当教員の日本語名\\
+endtype ???\\
+???
+
+\subsubsection{readvalue\_double(\$tag)}
+引数 tag edit.phpで入力された文字列\\
+???
+
+\subsubsection{make\_pdf(\$depart, \$simplefilename)}
+引数 depart 学科名\\
+simplefilename ???\\
+XMLファイルからpdfファイルを作成します。
+
+\subsubsection{htmlSCU8(\$var)}
+引数 var 任意の値\\
+varをHTMLで正しく表示できるように変換します。
+
+\subsubsection{xml\_ent(\$string)}
+引数 string 任意の文字列\\
+stringをHTMLで正しく表示出来るように変換します。
+
+\subsubsection{xmd\_ent\_de(\$string)}
+引数 string 任意の文字列\\
+stringをデコードします。
+
+\subsubsection{regist\_class.php}
+\subsubsection{xml\_ent(\$string)}
+引数 string 任意の文字列\\
+任意の文字列をエンコードします。
+
+
+\subsubsection{xml\_ent\_de(\$string)}
+引数 string 任意の文字列\\
+任意の文字列をデコードします。
+
+
+\subsubsection{replacetext.php}
+\subsubsection{replaceText(\$str)}
+引数 str 任意の文字列\\
+文字列をハッシュ表と照らし合わせ、合致すれば置き換えます。
+
+
+\subsubsection{str2otf.php}
+\subsubsection{str2otf(\$str)}
+引数 str 任意の文字列\\
+???
+
+\subsubsection{ordUTF8(\$c, \$index)}
+引数 c ???\\
+index ???\\
+???
+
+
+
+\subsubsection{ChangeFlag(\&\$f)}
+引数 f flag\\
+フラグを反転させる。
+
+
+\subsubsection{view\_user\_class.php}
+\subsubsection{check\_password(\$password)}
+引数 password パスワード\\
+パスワードが正しく入力されているかチェックします。
+
+
+\subsubsection{makelist()}
+???
+
+\subsection{定数一覧}
+存在しません。value.incに複数ページで使用する変数を記述しています。
+\subsection{変数一覧}
+???
+\end{document}

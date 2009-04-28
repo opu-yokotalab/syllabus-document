@@ -1,0 +1,160 @@
+\documentclass[a4j,14pt]{jarticle}
+%ここからプリアンプル
+\setlength{\topmargin}{0mm}
+\setlength{\textheight}{230mm}
+%\setlength{\oddsidemargin}{0mm}
+%\setlength{\evensidemargin}{0mm}
+%\setlength{\textwidth}{160mm}
+
+%ここから本文
+\title{2009年度シラバスシステム\\基本仕様書}
+\author{松吉 健太}
+\西暦
+\date{\today}
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{はじめに}
+本書は岡山県立大学におけるシラバスの作成を支援する「シラバスシステム」の
+要件を定義するものである。
+\section{用語定義}
+以下にシラバスシステム内で用いる用語・語句を定義する。
+
+\begin{itemize}
+\item シラバス\\
+授業科目の計画や目的を示す資料
+一科目が1ページとなる。
+\item 授業科目名\\
+授業科目の日本語名及び英語名、（）内は英語名
+\item 担当教員\\
+授業科目を担当する教員の氏名
+常勤の場合は授業科目を担当する教員の岡山県立大学の部屋番号、非常勤の場合は（）内に非常勤と記入
+すぐ後ろには授業科目を担当する教員のメールアドレスも記入
+\item 対象学年\\
+講義の対象となる学年
+\item 概略\\
+講義内容や科目の説明
+\item 授業科目の到達目標\\
+単位を取得する際、理解しているのが望ましいとされる部分
+\item 履修上の注意\\
+履修する際に習得しておくべき要件やその他講義の形式等
+\item 授業内容とスケジュール\\
+各回講義内容の要点、概要
+\item 単位数\\
+授業科目を履修した場合に生徒が取得する単位の数
+\end{itemize}
+
+\section{システムの概要}
+本システムの目的はシラバスの効率的な作成である。
+シラバスシステムは稼働前に対象となるユーザへログイン名とログインパスワードの配布を行う。
+教務委員のユーザには同時に管理者パスワードの配布を行う。
+
+システム稼働期間中はユーザは配布されたログイン名とパスワードを用いシステムにログインし、シラバスの入力を行う。
+
+ログインすると、科目一覧、科目の新規登録、パスワード変更、ログアウトが表示される。
+
+\begin{itemize}
+\item 科目一覧\\
+  \begin{itemize}
+  \item 編集\\
+    作成中（登録済み）の科目の内容を編集
+  \item PDF\\
+    編集した科目の仕上がりを見る
+  \item 削除\\
+    編集した科目を削除
+  \end{itemize}
+\item 科目の新規登録\\
+科目名を入力し、登録をクリックすると新規に科目が登録される
+（登録した科目名がそのままｼﾗﾊﾞｽの科目名になる、科目一覧の編集で変更可能）
+\item パスワード変更\\
+新規パスワードを入力し、変更をクリックするとパスワードが変更できる
+\item ログアウト\\
+ログアウトしてトップ画面に移る
+編集を行うにはログインし直す必要がある。
+\end{itemize}
+
+\newpage
+
+\section{対象となるユーザ}
+\begin{itemize}
+\item 教員\\
+岡山県立大学の教員。\\
+非常勤講師が担当する科目は担当の教務委員が入力を行う。
+\item 動作保証OS
+\begin{itemize}
+\item Windows XP
+\item Windows Vista
+\item Linux系OS
+\end{itemize}
+\item 動作保証ブラウザ
+\begin{itemize}
+\item InternetExplorer 6
+\item InternetExplorer 7
+\item Firefoxe 3
+\end{itemize}
+\end{itemize}
+
+\section{システム構成}
+\subsection{ハードウェア構成}
+\subsubsection{サーバ}
+横田研alphaサーバ
+\begin{itemize}
+\item IPアドレス　163.225.223.3
+\item スペック \\
+CPU0: Intel Pentium III (Coppermine) stepping 0a \\
+Memory: 1033568k/1048320k available \\
+\end{itemize}
+\subsubsection{ソフトウェア構成}
+\begin{itemize}
+\item OS VineLinux4.2
+\item PHP5.2.6
+\item Apache2
+Webサーバ。
+\item ptetex\\
+UTF-8がサポートする文字を利用する為に、導入されている。
+\end{itemize}
+
+\newpage
+
+\section{開発体制}
+\subsection{M1}
+
+小宮山
+\subsection{B4}
+
+結城\\
+有安\\
+\subsection{B3}
+
+上田\\
+岡崎\\
+岡本\\
+金子\\
+近藤\\
+松吉\\
+
+\section{開発スケジュール}
+2008年度年末
+\section{開発環境}
+\subsection{開発言語}
+\begin{itemize}
+\item PHP 
+PHP 5.2.6を利用。
+\item CSS
+\item XML
+\end{itemize}
+\subsection{依存関係}
+\begin{itemize}
+\item php.xml 
+PHPにおいてXML文章をパースする為のライブラリ。
+\item php.apache2 
+Webサーバが適切にPHPを解釈するための設定ファイルなど。
+\item Adobe Reader 
+作成したPDFファイルの閲覧。
+\end{itemize}
+
+\end{document}

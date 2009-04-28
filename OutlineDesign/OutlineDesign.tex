@@ -1,0 +1,93 @@
+\documentclass[]{jarticle}
+\usepackage[dviout]{graphicx}
+\usepackage{ascmac}
+%%% 上下 3cm,  左右 2cm の余白を定義します %%%
+\paperwidth  597pt
+\paperheight 845pt
+\hoffset   -14.0pt
+\voffset    14.5pt
+ \oddsidemargin 0.0pt
+ \evensidemargin 0.0pt
+ \topmargin     0.0pt
+ \headheight    0.0pt
+ \headsep       0.0pt
+\textheight 659.0pt 
+%\textheight 671.0pt 
+\textwidth  480.5pt
+ \marginparsep   0.0pt
+ \marginparwidth 0.0pt
+\footskip 1.0cm 
+
+\renewcommand{\footnoterule}{
+\vspace{0.5pt}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{-0.5pt}
+}
+
+\title{岡山県立大学シラバス管理システム2009\\外部設計書\\}
+\author{上田 文太\\岡本 広大}
+\西暦
+\date{\today}
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+\newpage
+\section{開発期間}
+2008年12月～2009年3月
+\subsection{運用期間}
+2009年1月xx日～
+ただし、サポートは平日の昼間のみ。
+\section{開発者}
+M2:小宮山
+
+M1:結城, 有安
+
+B4:濱野, 畠中, 佐藤, 最相, 池田, 松村
+\section{画面推移図}
+シラバス管理システムの画面上の推移を図１に示す。
+
+\newpage
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=17cm]{zukei.eps}
+\caption{画面の推移図}
+\end{center}
+\end{figure}
+
+\newpage
+
+\section{機能}
+本章ではシラバスシステムが持つ機能について示す。
+\subsection{機能一覧}
+\begin{itemize}
+\item ログイン・ログアウト機能\\
+ユーザのログイン・ログアウトを行う。
+
+\item 科目一覧表示機能\\
+登録されたシラバスの科目の一覧を表示する。
+
+\item シラバス内容編集機能\\
+シラバスの内容の編集を行う。
+
+\item 新規科目の登録、削除機能\\
+新規科目の登録やすでに登録されている科目の削除を行う。
+
+\item シラバスPDF生成機能\\
+新規入力、編集又は科目一覧から指定されたシラバスからPDFの生成を行い、表示する。
+
+\item 管理者機能\\
+管理者ユーザに対して全ての科目のシラバスの編集を提供する。
+また教員の追加、削除を提供する。
+
+\item パスワード変更機能\\
+ログイン時のパスワードの変更を行う。
+
+\item 所有教員の変更機能\\
+科目を所有している教員の変更を行う。
+
+\end{itemize}
+
+\end{document}

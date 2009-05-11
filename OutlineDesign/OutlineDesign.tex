@@ -37,27 +37,85 @@
 \section{開発期間}
 2008年12月～2009年3月
 \subsection{運用期間}
-2009年1月xx日～
+一般；2009年1月5日～2009年1月7日
+教務員；2009年1月5日～2009年1月9日
+
 ただし、サポートは平日の昼間のみ。
 \section{開発者}
-M2:小宮山
+M2；小宮山
 
-M1:結城, 有安
+B4；濱野、松村
 
-B4:濱野, 畠中, 佐藤, 最相, 池田, 松村
-\section{画面推移図}
-シラバス管理システムの画面上の推移を図１に示す。
+B3；上田、岡崎、岡本、金子、近藤、松吉
 
-\newpage
+\section{画面推移の具体的な説明}
+本章では、画面上の推移について具体的に文章で説明する。
+以下、矢印の左側に書かれている項目をクリックすると矢印の右側に表記されているページに移動するという事を示す。
 
-\begin{figure}[h]
-\begin{center}
-\includegraphics[width=17cm]{zukei.eps}
-\caption{画面の推移図}
-\end{center}
-\end{figure}
+\subsection{「岡山県立大学シラバス管理システム2009 トップページ」から}
+\begin{itemize}
+\item 「認証」（教員IDとパスワードが正しい場合） → 「科目一覧」
+\item 「認証」（教員IDとパスワードが正しくない場合） → 「ログインエラーページ」
+\item 「使い方・注意事項」 → 「使い方・注意事項」
+\item 「登録済の科目一覧」→ 「登録済の科目一覧」
+\item 「Get ADOBE READER」と書かれたバナー → 「Adobe Reader ダウンロードページ」
+\end{itemize}
 
-\newpage
+\subsection{「科目一覧」から}
+\begin{itemize}
+\item 「新規教員の登録」 → 「新規教員の登録」
+\item 「教員を選んで削除」 → 「教員の削除」
+\item 科目名 → その科目のシラバス内容をPDFで表示
+\item 「入力教員(ID:Mail)の変更」欄のメールアドレス → 「所有教員の変更」
+\item 「編集」 → 「シラバス内容編集ページ」
+\item 「削除」 → 「科目の削除」
+\item 「新規科目登録」 → 「新規科目の登録」
+\item 「パスワード変更」 → 「パスワード変更」
+\item 「ログアウト」 → 「岡山県立大学シラバス管理システム2009 トップページ」
+\end{itemize}
+
+\subsection{「教員新規登録」から}
+\begin{itemize}
+\item 「登録」（入力項目が正しい場合） → 「教員登録完了」
+\item 「登録」（入力項目に誤りが有る場合） → 「教員登録エラー」
+\end{itemize}
+
+
+\subsection{「教員の削除」から}
+\begin{itemize}
+
+\item 「削除する」（「所有ファイルもすべて削除」にチェックを入れていない場合） → 「教員削除完了」
+\item 「削除する」（「所有ファイルもすべて削除」にチェックを入れた場合） → 「教員削除完了（所有ファイルも削除）」
+\item 「削除完了」（教員を選択していない場合） → 「教員削除エラー」
+\end{itemize}
+
+\subsection{「所有教員の変更」から}
+\begin{itemize}
+\item 「変更する」 → 「所有教員変更完了」
+\end{itemize}
+
+\subsection{「パスワード変更」から}
+\begin{itemize}
+\item 「変更」（入力項目が正しい場合） → 「パスワード変更完了」
+\item 「変更」（入力項目に誤りが有る場合） → 「パスワード変更エラー」 
+\end{itemize}
+
+\subsection{「科目の削除」から}
+\begin{itemize}
+\item 「削除」 → 「科目削除完了」
+\end{itemize}
+
+\subsection{「新規科目の登録」から}
+\begin{itemize}
+\item 「登録」（入力項目が正しい場合） → 「科目登録完了」
+\item 「登録」（入力項目に誤りが有る場合） → 「科目登録エラー」
+\end{itemize}
+
+\subsection{「シラバス内容編集ページ」から}
+\begin{itemize}
+\item 「入力完了」（入力項目が正しい場合） → 「PDFファイル生成完了」
+\item 「入力完了」（入力項目に誤りが有る場合） → 「PDFファイル生成失敗」 
+\end{itemize}
 
 \section{機能}
 本章ではシラバスシステムが持つ機能について示す。
@@ -87,7 +145,167 @@ B4:濱野, 畠中, 佐藤, 最相, 池田, 松村
 
 \item 所有教員の変更機能\\
 科目を所有している教員の変更を行う。
-
 \end{itemize}
+
+
+\section{各画面の構成、フォーム}
+本章では各画面の構成、フォームについての説明を行う。
+\subsection{岡山県立大学シラバス管理システム2009トップページ}
+岡山県立大学シラバス管理システム2009トップページを図3に示す。
+
+このページの中央部には2箇所のテキストボックスがあり、そこに教員ID,それに対応したパスワードを入力して[認証]をクリックすることでシラバスシステムにログイン、科目一覧画面に移動することができる。また画面左下には使い方・注意事項、右側には登録済みの科目一覧、Adobeダウンロードページ、メーリングリスト(バグ報告など)へのリンクを設けている。
+
+\subsection{使い方、注意事項}
+使い方・注意事項のページを図4に示す。
+
+このページでは上部に各画面の使い方を、下部には注意事項を記述している。また最下部にある[戻る]をクリックすることで岡山県立大学シラバス管理システム2009トップページに移動する。
+
+\subsection{ログインエラーページ}
+ログインエラーページを図5に示す。
+
+岡山県立大学シラバス管理システム2009トップページからうまくログインできなかった場合はこのページに移動する。うまくログインできなかった原因が示されており、[こちら]をクリックすることで岡山県立大学シラバス管理システム2009トップページに移動する。
+
+\subsection{科目一覧}
+科目一覧ページを図6に示す。
+
+このページで学科ごとに科目が一覧になって表示されており、科目名をクリックするとその科目のPDFを作成し、表示する。科目名の右側にはその科目の入力教員が表示されており、この部分をクリックすると入力教員の変更ページに移動する。さらに右側には更新の有無を表示し、[編集]、[削除]をクリックするとその科目のシラバス内容編集ページ、科目の削除ページに移動する。それぞれの学科の最下部には新規科目の登録ページへのリンクが設けられている。
+
+またページ最上部右側に新規教員の登録ページ、教員の削除ページへのリンク、ページ最下部右側にはパスワード変更ページへのリンクを設けておりここをクリックしてそれぞれのページに移動する。ページ最下部[ログアウト]をクリックするとシラバス管理システムからログアウトし、岡山県立大学シラバス管理システム2009トップページに移動する。
+
+\subsection{新規教員の登録}
+新規教員の登録ページを図7に示す。
+
+3箇所の内最上部のテキストボックスにメールアドレスを入力する。中央にあるテキストボックスにパスワードを入力し、確認のためその下側にあるテキストボックスにも同じパスワードを入力する。この状態で[登録]をクリックすると新規教員の登録を行い科目一覧ページに移動する。また[リセット]をクリックすると3箇所のテキストボックスをクリアする。
+
+\subsection{教員の削除}
+教員の削除ページを図8に示す。
+
+ページ中央部にあるリストから削除したい教員名を選択し、ページ最下部の[削除する]をクリックすることで教員の削除を行う。またリストの下部にあるチェックボックスにチェックを入れておくことでその教員の所有ファイルも全て削除する。
+
+\subsection{所有教員の変更}
+所有教員の変更ページを図9に示す。
+
+ページ中央部にあるリストの中から新しい所有教員を選択し、[変更する]をクリックすると所有教員の変更を行い科目一覧ページに移動する。
+
+\subsection{パスワード変更}
+パスワード変更ページを図10に示す。
+
+2箇所の内上側にあるテキストボックスに新しく使うパスワードを入力し、確認のためその下側にあるテキストボックスにも同じパスワードを入力する。この状態で[変更]をクリックするとパスワードの変更を行い科目一覧ページに移動する。また[リセット]をクリックすると2箇所のテキストボックスをクリアする。
+
+\subsection{科目の削除}
+科目の削除ページを図11に示す。
+
+テキストの下部にある[削除する]をクリックすると科目の削除を行い、科目一覧ページに移動する。また[削除せずに前の画面に戻る]をクリックしても科目一覧ページに移動するが、この場合科目の削除は行わない。
+
+\subsection{新規科目の登録}
+新規科目の登録ページを図12に示す。
+
+ページ中央部にあるテキストボックスに科目名を入力し、下部の[登録]をクリックすると科目一覧ページに移動する。移動後は新規登録した科目名が一覧に追加されているのでそこから編集を行うことができる。また[登録せずに前の画面に戻る]をクリックしても科目一覧ページに移動するが、この場合は一覧に科目名が追加されない。
+
+\subsection{シラバス内容編集ページ}
+シラバス内容編集ページを図13に示す。
+
+このページでシラバス内容の編集を行う。ページの上部から日本語教科名,英語教科名,担当教員,担当教員の連絡先,単位数,対象学生,概略,授業科目の目標,履修上の注意,授業計画,成績評価,教材,備考などを記入するテキストボックスを設けられている。単位数の欄はリストのなかより選択し、授業計画の記入方法についてはスケジュール形式か自由形式かを選択する。必要事項を入力して一時保存又は完了の欄にチェックを入れ、[入力完了]をクリックすると編集を終え、科目一覧ページに移動する。また[全てやり直す]をクリックすると全てのテキストボックスをクリアする。
+
+
+
+\section{画面の推移図、キャプチャ画像}
+本章では画面の推移図（図\ref{suiizu_1}～図\ref{suiizu_2}）、各画面のキャプチャ画像（図\ref{top}～図\ref{hensyu}）を掲載する。
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{suiizu_1.eps}
+    \caption{画面の推移図1}
+    \label{suiizu_1}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{suiizu_2.eps}
+    \caption{画面の推移図2}
+    \label{suiizu_2}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{top.eps}
+    \caption{岡山県立大学シラバス管理システム2009 トップページ}
+    \label{top}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{tsukaikata.eps}
+    \caption{使い方・注意事項}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{error.eps}
+    \caption{ログインエラーページ}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{itiran.eps}
+    \caption{科目一覧}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{kyouin_touroku.eps}
+    \caption{新規教員の登録}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{kyouin_sakujo.eps}
+    \caption{教員の削除}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{kyouin_henkou.eps}
+    \caption{所有教員の変更}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{password.eps}
+    \caption{パスワード変更}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{kamoku_sakujo.eps}
+    \caption{科目の削除}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[width=17cm]{kamoku_touroku.eps}
+\caption{新規科目の登録}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=17cm]{hensyu.eps}
+    \caption{シラバス内容編集ページ}
+    \label{hensyu}
+  \end{center}
+\end{figure}
+
 
 \end{document}

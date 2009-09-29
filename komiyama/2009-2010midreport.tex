@@ -1,0 +1,147 @@
+\documentclass[titlepage]{jsarticle}
+\title{シラバスシステム引継文書(2009-2010)\\（途中経過報告 システムと運用編）}
+\author{シラバスシステム開発チーム2009 休学中 小宮山}
+\date{最終更新日:\today}
+\begin{document}
+\maketitle
+\subsection*{本文書の概要}
+業務が完了しないため、中間報告書として作成された。
+著者の独断と偏見による、シラバスシステムにおける変更点と現状、及び今後の展望を記述するチラシの裏である。
+\section{2009年度における要求と運用}
+\subsection{年次要求}
+\begin{description}
+ \item[ドキュメント] 
+ 前年度から特にシステムの変更がないため、予算獲得のために提案された業務内容である。
+詳細については特に要望はなく、内容の決定に関しては学生側に一任された。
+\item[学外からの入力] 
+非常勤の先生から「来年度シラバスの入力を自分で入力します」との教務の先生への連絡があり、
+教務委員の先生から学外からのシステムへのアクセスの可否を問われ、「規制しない方向で考えている」と返答。
+\end{description}
+\subsection{2009年度システムにおける変更の概要}
+\begin{itemize}
+ \item 半角文字の処理
+ \item セッションの導入
+ \item 管理者によるユーザ管理
+% \item バグフィックス
+ \item ドキュメントの作成(未完了)
+% \item バージョン名で遊んだ(「どうでもいいですよ、もう」のハッシュ値)
+\end{itemize}
+
+\subsection{開発体制と運用体制}
+表\ref{tab:member}に示す役割とメンバーで行われた。
+
+B3の教育は主任を中心にB4で行いfugafugaがサポートした。
+
+開発はfugafugaが主任と相談の上行った。
+
+運用期間中はB3が待機し、主任とfugafugaが付き添った。
+尚、修正が必要な場合にはfugafugaが対応した。
+
+尚、給与を手にしたのは主任とB3である。
+\begin{table}
+\begin{center}
+\caption{メンバー表}
+\label{tab:member}
+\begin{tabular}{|l|c|c|} \hline
+主任&&\\
+%兼　マシン環境破壊役&&\\
+兼　後輩指導& B4& 松村 \\
+兼　テキスト作成&&\\
+%兼　Marionette &&\\
+ \hline
+主任補佐　& B4 &濱野 \\
+兼　ドキュメント作成指導　&&\\ \hline
+ドキュメント作成　&B3&岡崎\\
+&&岡本\\
+&&金子\\
+&&近藤\\
+&&松吉\\ \hline
+コードチェック　& M1& 結城 \\ \hline
+協力　& B4&全員\\
+&M1& 有安 \\ \hline
+fugafuga &休学中& 小宮山 \\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+\newpage
+\section{実装}
+\subsection{半角文字}
+半角文字を正しく扱えるようにした。
+
+前年度のシステムではotfの利用によりunicodeのサポートやXMLの文字コードをUTF-8にする等の改良を行ったが、
+Perlを用いた旧システムとの互換性確保のために一部半角文字を全角に置き換えていた。%実装上の理由だっけ？
+これらを半角文字としてPDF出力まで保持するように変更した。また{-}を連続して記述すると---となる問題にも対処した。
+文字列の変換について\ref{tab:strchange}に示す。
+\begin{table}
+\begin{center}
+\label{tab:strchange}
+\caption{文字変換表}
+\begin{tabular}{|c|c|c|c|} \hline
+ 入力& xml& str2otf.php&  (XSLT)tex\\ \hline\hline
+ $\langle$ & \&lt; & \$$\backslash$langle\$ & \$$\backslash$langle\$ \\ \hline
+ $\rangle$ & \&gt; & \$$\backslash$rangle\$ & \$$\backslash$rangle\$ \\ \hline
+ \& & \&amp; & $\backslash$\&amp; & $\backslash$\& \\ \hline
+ " & \&quot; & $\backslash$\&quot; & " \\ \hline
+ ' & \&apos; & $\backslash$\&apos; & ' \\ \hline
+ \# & \# & $\backslash$\# & $\backslash$\# \\ \hline
+ \$ & \$ & $\backslash$\$ & $\backslash$\$ \\ \hline
+ \% & \% & $\backslash$\% & $\backslash$\% \\ \hline
+ \_ & \_ & $\backslash$\_ & $\backslash$\_ \\ \hline
+ \{ & \{ & $\backslash$\{ & $\backslash$\{ \\ \hline
+ \} & \} & $\backslash$\} & $\backslash$\} \\ \hline
+ $\backslash$ & $\backslash$ & \$$\backslash$backslash\$ & \$$\backslash$backslash\$ \\ \hline
+ {-} & {-} & \{{-}\} & \{{-}\} \\ \hline
+ \~{} & \~{} & $\backslash$\~{}\{\} & $\backslash$\~{}\{\} \\ \hline
+ \^{} & \^{} & $\backslash$\^{}\{\} & $\backslash$\^{}\{\} \\ \hline
+ $*$ & $*$ & \$$*$\$ & \$$*$\$ \\ \hline
+ $|$ & $|$ & \$$|$\$ & \$$|$\$ \\ \hline
+ その他の&&&\\半角記号 & そのまま & そのまま & そのまま \\
+ 等&&&\\ \hline
+ 上記以外 & そのまま & $\backslash$\{\($unicodeの値$\)\} & $\backslash$\{\($unicodeの値$\)\} \\ \hline
+ \end{tabular}
+\end{center}
+\end{table}
+
+\subsection{セッションの導入}
+学外からのシステムへのアクセスにあたり、セキュリティの観点からセッションを導入した。
+学外のアクセス自体は過去も行っていたが、正式にサポートするにあたり前年度に提案を行ったセッション管理を導入した。
+%詳細はいつ作成されるか分からない、仕様書及び最終報告書で述べる予定である。だいぶ忘れたけどｗ
+変更は以下の通りである。
+\begin{itemize}
+ \item .htaccess
+ \item php\_value,php\_flagの追加
+ \item 一部変数整理・追加
+ \item ファイル追加(session\_$*$.inc)
+ \item value.incに\$session\_cookie\_path、\$session\_$*$\_phpなどを追加
+\end{itemize}
+変更対象はview\_user\_class.phpを中心にほぼすべてのphpファイルである。
+
+
+\subsection{管理者によるユーザ管理}
+教員の管理機能へのアクセスについて管理者のみとした。また科目の所有教員の変更機能を追加した。
+
+具体的には、delete\_user.phpとregist\_user.phpへのリンクについては、
+rootでログインしたview\_user\_class.phpからのみに変更した。
+また、chown\_class.phpを追加した。
+
+
+\subsection{その他のバグフィックス}
+\begin{itemize}
+ \item てきとーに教員IDの妥当性をチェック(エスケープ無しでファイル名に含められない文字をチェックしてるはず、たぶん)
+ \item 科目名（ファイル名）に内部処理でのデリミタ「:」を含む場合の対応
+ \item 他忘れた
+\end{itemize}
+\subsection{ドキュメントの作成}
+20年度B3の主な業務であった。主任がテンプレートを作成し、B3が作成担当であった。
+
+
+再提出を繰り返しても一向に内容が向上せず、一向に完成しないため主任の引継ぎを受けた濱野が21年度5月下旬に打ち切った。
+今後濱野と小宮山が作成する予定である。
+今現在未完了。
+\section{来年度へ向けて}
+岡崎君がRuby on Railsで実装し、alphaのOSもubuntuに入れ替える予定である。
+
+おそらくサブシステムとして本年のシステムが利用されるであろう。
+
+また、来年度は全学で本システムを利用することも検討されている。
+\end{document}

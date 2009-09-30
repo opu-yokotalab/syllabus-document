@@ -1,0 +1,40 @@
+\documentclass[a4j,12pt,titlepage]{jsarticle}
+\title{シラバスシステム引継文書(2009-2010)\\（運用メモ編）}
+\author{シラバスシステム2009　\\2008年度休学 小宮山}
+\date{最終更新日:\today}
+\begin{document}
+\maketitle
+\subsection*{本文書の概要}
+著者の独断と偏見による、シラバスシステムの運用方法等について記述するチラシの裏である。
+%\section{概要}
+\section{2009年度システムの移植}
+\subsection{alpha}
+%環境を整え、
+\begin{itemize}
+ \item データをドキュメントルート以下にコピー
+ \item value.inc中の\$session\_cookie\_pathを変更
+ \item 所有者と所有グループをapacheに変更
+ \item data/passwd.txt.bacをdata/passwd.txtにリネーム
+\end{itemize}
+\section{運用}
+\subsection{運用前}
+横田先生に聞かれたら予算決定し請求する。予算は教授会？で決定する。ほぼそのまま通る。
+
+11月から1月頃まで、年次要求がばらばらと横田先生や教務委員の先生から降って来るので対応する。
+
+\subsection{運用期間開始}
+開始時間に、~/public\_html/index.phpからindex.phpへリダイレクトするようにしておく。
+\subsection{一般教員入力期間中}
+2617で待機。
+メーリングリストに質問が着たら回答する。場合によっては質問者のところに出向いて説明する。
+%一番初めに小松先生から見た目の問い合わせが来るはず。
+\subsection{一般教員入力期間終了}
+~/public\_html/index.phpからindex.phpへリダイレクトを解除する。
+
+\subsection{運用期間終了}
+data/passwd.txtから一般教員のアカウント情報を削除。cronでrootのみのファイルと入れ替えると良い。
+
+\subsection{運用後}
+教務委員の先生をはじめとして再度編集したいなどの要望が来るので、対応する。
+
+\end{document}

@@ -1,6 +1,6 @@
 \documentclass[a4j,12pt,titlepage]{jsarticle}
 \title{シラバスシステム引継文書(2009-2010)\\（運用メモ編）}
-\author{シラバスシステム2009　\\2008年度休学 小宮山}
+\author{シラバスシステム開発チーム2009　\\2008年度休学 小宮山}
 \date{最終更新日:\today}
 \begin{document}
 \maketitle
@@ -8,17 +8,19 @@
 著者の独断と偏見による、シラバスシステムの運用方法等について記述するチラシの裏である。
 %\section{概要}
 \section{2009年度システムの移植}
-\subsection{alpha}
+\subsection{alpha上での方法}
 %環境を整え、
 \begin{itemize}
- \item データをドキュメントルート以下にコピー
+ \item システム一式分のデータをコピー
  \item value.inc中の\$session\_cookie\_pathを変更
- \item 所有者と所有グループをapacheに変更
  \item data/passwd.txt.bacをdata/passwd.txtにリネーム
+ \item 所有者と所有グループをapacheに変更
 \end{itemize}
 \section{運用}
 \subsection{運用前}
-横田先生に聞かれたら予算決定し請求する。予算は教授会？で決定する。ほぼそのまま通る。
+横田先生に聞かれたら予算案を決定し請求する。予算は教授会？で最終決定する模様。今のところ例外なくそのまま通った。
+算出目安は全年度を参考。なお以前、情報通信工学科のみの時には総額8万を２～３人で割っていた。
+
 
 11月から1月頃まで、年次要求がばらばらと横田先生や教務委員の先生から降って来るので対応する。
 

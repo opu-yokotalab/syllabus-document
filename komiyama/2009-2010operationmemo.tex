@@ -1,4 +1,4 @@
-\documentclass[a4j,12pt,titlepage]{jsarticle}
+\documentclass[a4j,12pt]{jsarticle}
 \title{シラバスシステム引継文書(2009-2010)\\（運用メモ編）}
 \author{シラバスシステム開発チーム2009　\\2008年度休学 小宮山}
 \date{最終更新日:\today}
@@ -25,13 +25,16 @@
 11月から1月頃まで、年次要求がばらばらと横田先生や教務委員の先生から降って来るので対応する。
 
 \subsection{運用期間開始}
-開始時間に、~/public\_html/index.phpからindex.phpへリダイレクトするようにしておく。
+開始時間に、\~{}/public\_html/index.phpからindex.phpへリダイレクトするようにしておく。
 \subsection{一般教員入力期間中}
 2617で待機。
 メーリングリストに質問が着たら回答する。場合によっては質問者のところに出向いて説明する。
 %一番初めに小松先生から見た目の問い合わせが来るはず。
+
+出力されるPDFが変わるような変更が発生した場合は、全ファイル再組版し入力完了していた教員に対して再度確認を要請する。
+
 \subsection{一般教員入力期間終了}
-~/public\_html/index.phpからindex.phpへリダイレクトを解除する。
+\~{}/public\_html/index.phpからindex.phpへリダイレクトを解除する。
 
 \subsection{運用期間終了}
 data/passwd.txtから一般教員のアカウント情報を削除。cronでrootのみのファイルと入れ替えると良い。

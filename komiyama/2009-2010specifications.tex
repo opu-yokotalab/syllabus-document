@@ -1,0 +1,213 @@
+\documentclass[titlepage]{jsarticle}
+\title{シラバスシステム引継文書(2009-2010)\\（仕様編）}
+\author{シラバスシステム開発チーム2009 \\2008年度休学 小宮山}
+\date{最終更新日:\today}
+\begin{document}
+\maketitle
+\subsection*{本文書の概要}
+著者の独断と偏見による、シラバスシステムにおける仕様、及び今後の展望を記述するチラシの裏である。
+\section{システム概要}
+\section{画面遷移図と機能}
+%\section{ファイル配置}
+\section{処理}
+%\begin{center}
+%\begin{tabular}{|c|c|} \hline
+%処理概要 & \\ \hline
+%呼出元 & \ref{}\\ \hline
+%呼出先 & \ref{}\\ \hline
+%その他の関連ファイル & \ref{}\\ \hline
+%\end{tabular}
+%\end{center}
+%\subsubsection{説明}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+%
+%\end{verbatim}
+\subsection{index.php}\label{sec:index-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & ログインフォームの出力、ログアウト処理\\ \hline
+requre\_once & value.inc  \\ \hline
+requre & \$session\_start\_php、\$session\_end\_php \\ \hline
+その他の関連ファイル & top.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常] 
+ログイン画面を出力。
+ \item[ログアウト時] 
+\_GET[logout]がある場合、ログアウト処理
+\end{description}
+\subsubsection{プログラムリスト}
+\begin{verbatim}
+
+\end{verbatim}
+
+\subsection{view\_user\_class.php}\label{sec:view-user-class-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 一覧画面出力、各種メニュー表示、ログイン処理、 \\ \hline
+requre\_once & value.inc  \\ \hline
+requre & \$session\_start\_php \\ \hline
+その他の関連ファイル & SCS.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常] 
+ セッションチェック
+ \item[ログイン時] 
+ セッション変数のセットまたはセッションエラー処理
+ \item[一般ユーザ] 
+ 所有科目の一覧とメニューを出力
+ \item[管理者ユーザ] 
+ 全科目一覧とメニュー、教員管理目メニューを出力
+\end{description}
+\subsubsection{プログラムリスト}
+\begin{verbatim}
+
+\end{verbatim}
+
+\subsection{regist\_user.php}\label{sec:regist-user-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 新規教員の登録 \\ \hline
+requre\_once & \$value.inc  \\ \hline
+requre & \$session\_start\_php、\$session\_check\_php \\ \hline
+その他の関連ファイル & \$FILE\_PASSWD、\$FILE\_PASSWDNEW、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常] 
+ 登録フォーム出力
+ \item[フォームデータ受信時] 
+ \$\_POST[in]が1ならば、内容チェック、教員データ登録処理
+ \item[エラー時] 
+ エラーメッセージを出力
+\end{description}
+\subsubsection{プログラムリスト}
+\begin{verbatim}
+
+\end{verbatim}
+
+\subsection{delete\_user.php}\label{sec:delete-user-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 教員の削除 \\ \hline
+requre\_once & \$value.inc  \\ \hline
+requre & \$session\_start\_php、\$session\_check\_php、(\$session\_check\_php) \\ \hline
+その他の関連ファイル & \$FILE\_PASSWD、\$FILE\_PASSWDNEW、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常] 
+ 登録フォーム出力
+ \item[フォームデータ受信時] 
+ \$\_POST[in]が1ならば、内容チェック、教員データ登録処理
+ \item[エラー時] 
+ エラーメッセージを出力
+\end{description}
+\subsubsection{プログラムリスト}
+\begin{verbatim}
+
+\end{verbatim}
+
+ユーザーの削除処理を行います。
+削除する際に、ユーザーのxml・pdfファイルも同時に削除するかどうか尋ねます。
+正常に削除されたときは、ユーザーはトップページへの、ルートユーザーは全ての科目一覧ページへのリンクを表示します。
+教員が選択されてないなど、ユーザーの記入漏れがある際は前画面へ戻るためのリンクを表示します。
+
+\subsection{change\_pass.php}\label{sec:change-pass-php}
+ユーザーのパスワードの変更を行います。ルートユーザーはパスワードの変更を行うことが出来ません。（多分）
+正常に変更されたときは科目一覧ページへのリンクを表示します。
+パスワードが入力されてない、確認のパスワードが一致しない。これら二つのエラーの際には前画面へ戻るためのリンクを表示します。
+
+\begin{itemize}
+\item 使用スタイルシート $maintenance.css$
+\end{itemize}
+
+\subsection{regist\_class.php}\label{sec:regist-class-php}
+新しい科目の登録を行います。登録は科目の担当教員が行います。
+ルートユーザーが新しい科目を登録するならば、$chown\_class.php$で科目の所有者を変更しないとユーザーは使えません。（多分）
+正常に登録されたときは、その科目のpdfファイルの元となるxmlファイルを作成し、科目一覧ページへのリンクを表示します。
+登録名が入力されてない場合は、エラーメッセージと、科目一覧ページへ戻るためののリンクを表示します。
+
+\begin{itemize}
+\item 使用スタイルシート $maintenance.css$
+\end{itemize}
+
+\subsection{delete\_class.php}\label{sec:delete-class-php}
+科目の削除処理を行います。
+削除する際に確認ページを表示します。
+正常に削除されたときは、科目一覧ページへのリンクを表示します。
+
+\begin{itemize}
+\item 使用スタイルシート $maintenance.css$
+\end{itemize}
+
+\subsection{edit.php}\label{sec:edit-php}
+選択された科目のシラバスの内容を編集します。
+正常に内容が変更された場合、対応するxmlファイルを更新し、pdfファイルを新たに生成します。
+
+\begin{itemize}
+\item 使用スタイルシート $edit.css$
+\end{itemize}
+
+\subsection{chown\_class.php}\label{sec:chown-class-php}
+選択された科目の所有者を変更します。この変更はルートユーザーのみ行うことが出来ます。
+
+\begin{itemize}
+\item 使用スタイルシート $maintenance.css$
+\end{itemize}
+
+\subsection{view\_all\_class.php}\label{sec:view-all-class-php}
+全ての科目のシラバスファイルの状態を確認することができます。
+また、既に作成されているpdfファイルにもアクセスすることができます。
+この機能は未ログインでも使用できます。
+
+\begin{itemize}
+\item 使用スタイルシート $SCS.css$
+\end{itemize}
+
+\subsection{str2otf.php}\label{sec:str2otf-php}
+otfは和文OpenTypeフォントを扱うための$Latex$のパッケージです。
+このファイルは、各文字をotfでの$UTF-8$の表示方法である$\backslash UTF????$という形式に変換するための
+$str2otf$という関数を定義しています。
+
+% セッションファイル
+\subsection{Sessionファイル}\label{sec:session-file}
+
+\subsection{session\_start.inc}\label{sec:sesion-start-inc}
+セッションを開始します。セッション名はsyllabusです。
+
+\subsection{session\_check.inc}\label{sec:session-check-inc}
+セッションファイルが作成されてないユーザー（ログインしていないユーザー）は$index.php$にリダイレクトされます。
+
+\subsection{session\_end.inc}\label{sec:session-end-inc}
+セッションファイルを削除します。セッションファイルと共にクッキーファイルも削除します。
+
+% 設定ファイル
+\subsection{設定ファイル}\label{sec:config-file}
+
+\subsection{value.inc}\label{sec:value-inc}
+各種ファイルで使用される変数を定義しています。定義一覧
+
+\begin{itemize}
+\item シラバスシステムのバージョン情報
+\item PHPファイル、セッションファイル、パスワードファイルのファイルパス
+\item セッションクッキーパス
+\item communications = 情報通信工学科　などの実学科名とプログラム中で使用している学科名との対応付け
+\end{itemize}
+
+% cssファイル
+\subsection{CSSファイル}\label{sec:css-file}
+CSSファイルリスト
+
+\begin{itemize}
+\item edit.css
+\item maintenance.css
+\item SCS.css
+\item top.css
+\item use.css
+\end{itemize}
+
+\end{document}

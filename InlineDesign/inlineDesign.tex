@@ -1,220 +1,759 @@
-\documentclass[]{jarticle}
+\documentclass[a4j, 12pt]{jarticle}
+% ¥×¥ê¥¢¥ó¥Ö¥ë
 \usepackage{ascmac}
-%%% $B>e2<(B 3cm,  $B:81&(B 2cm $B$NM>Gr$rDj5A$7$^$9(B %%%
-\paperwidth  597pt
-\paperheight 845pt
-\hoffset   -14.0pt
-\voffset    14.5pt
- \oddsidemargin 0.0pt
- \evensidemargin 0.0pt
- \topmargin     0.0pt
- \headheight    0.0pt
- \headsep       0.0pt
-\textheight 659.0pt 
-%\textheight 671.0pt 
-\textwidth  480.5pt
- \marginparsep   0.0pt
- \marginparwidth 0.0pt
-\footskip 1.0cm 
+\usepackage{graphicx}
 
-\renewcommand{\footnoterule}{
-\vspace{0.5pt}
-\noindent\rule{\textwidth}{0.4pt}
-\vspace{-0.5pt}
-}
+%%% É½¼¨¤¬¤ª¤«¤·¤¤¤Î¤Ç°Ê²¼¤ò¥³¥á¥ó¥È¥¢¥¦¥È %%%
+%%%% ¾å²¼ 3cm, º¸±¦ 2cm ¤ÎÍ¾Çò¤òÄêµÁ¤·¤Þ¤¹ ¡¡%%%
+%\paperwidth	597pt
+%\paperheight 	845pt
+%\hoffset   	-14.0pt
+%\voffset    	14.5pt
+%\oddsidemargin	  0.0pt
+%\evensidemargin 0.0pt
+%\topmargin     0.0pt
+%\headheight    0.0pt
+%\headsep       0.0pt
+%\textheight 	659.0pt 
+%% \textheight 	671.0pt 
+%\textwidth		80.5pt
+%\marginparsep	0.0pt
+%\marginparwidth 0.0pt
+%\footskip 	1.0cm 
 
-\title{2009$BG/EY%7%i%P%9%7%9%F%`(B\\$BFbIt@_7W=q(B}
-\author{$B2,:j(B $B9@OB(B}
-\$B@>Nq(B
-\date{\today}
+%\renewcommand{\footnoterule}{
+%	\vspace{0.5pt}
+%	\noindent\rule{\textwidth}{0.4pt}
+%	\vspace{-0.5pt}
+%}
+
 \begin{document}
+
+% É½»æ
+\title{²¬»³¸©Î©Âç³Ø¥·¥é¥Ð¥¹´ÉÍý¥·¥¹¥Æ¥à2009\\ÆâÉôÀß·×½ñ}
+\author{²¬ºê¡¡¹ÀÏÂ}
+\date{\today} % À¾Îñ
 \maketitle
 
+% ÌÜ¼¡
 \newpage
-\tableofcontents
+\tableofcontents % ÌÜ¼¡ºîÀ®Ì¿Îá
 \newpage
-\section{$BK\=q$K$D$$$F(B}
-$BK\=q$O(B2009$BG/EY$N%7%i%P%9%7%9%F%`$NFbIt@_7W=q$G$"$k!#(B
-\section{$B%7%9%F%`9=@.?^(B}
-$B2,;38)N)Bg3X%7%i%P%94IM}%7%9%F%`(B2009$B%7%9%F%`4IM}?^(B.pdf$B$r;2>H!#(B
-\section{$B%W%m%0%i%`>pJs(B}
-\subsection{$B%W%m%0%i%`9=@.(B}
-$B0J2<$K!"%7%i%P%9%7%9%F%`$N3F<o%W%m%0%i%`%U%!%$%k$H5!G=$N35MW$r<($9!#(B
-\subsubsection{change\_pass.php}
-$B%Q%9%o!<%I$NJQ99$r9T$$$^$9!#(B
-\subsubsection{delete\_class.php}
-$B2JL\$N:o=|$r9T$$$^$9!#(B
-\subsubsection{chown\_class.php}
-$B2JL\$r=jM-$7$F$$$k650w$NJQ99$r9T$$$^$9!#(B
-\subsubsection{delete\_user.php}
-$B650w$N:o=|$r9T$$$^$9!#(B
-\subsubsection{edit.php}
-$B%7%i%P%9$NJT=82hLL$NI=<($+$i(Bxml$B%U%!%$%k!&(Btex$B%U%!%$%k!&(Bpdf$B%U%!%$%k$N@8@.$^$G$r9T$$$^$9!#(B
-\subsubsection{index.php}
-$B%7%i%P%9%7%9%F%`$N(Bindex$B$NI=<($r9T$$$^$9!#(B
-\subsubsection{regist\_class.php}
-$B2JL\$NEPO?$r9T$$$^$9!#(B
-\subsubsection{regist\_user.php}
-$B650w$NEPO?$r9T$$$^$9!#(B
-\subsubsection{replacetext.php}
-$BLdBj$,H/@8$9$kFC<lJ8;z$NCV49$r9T$$$^$9!#(B
-\subsubsection{str2otf}
-$B3FJ8;z$r(Botf$B$G$N(BUTF-8$B$NI=<(J}K!$G$"$k(B\verb"\UTF$B!)!)!)!)(B"$B$H$$$&7A<0$KJQ49$7$^$9!#(B
-\subsubsection{syllabus\_pdf.xsl}
-$B%7%i%P%9$N(Bxml$B%U%!%$%k$+$i(B\TeX $B$N7A<0$KJQ49$&$9$k$?$a$N(Bxsl$B$,5-=R$5$l$F$$$^$9!#(B
-\subsubsection{use.html}
-$B;H$$J}!&Cm0U;v9`$N%Z!<%8$N(Bhtml$B$G$9!#(B
-\subsubsection{view\_all\_class.php}
-$B2JL\0lMw$NI=<($r9T$$$^$9!#(B
-\subsubsection{view\_user\_class.php}
-$B3F650w$N2JL\0lMw$NI=<($r9T$$$^$9!#(B
-\subsubsection{session\_start.inc}
-$B%;%C%7%g%s$N3+;O$7$^$9!#(B
-\subsubsection{session\_check.inc}
-$B%;%C%7%g%s%U%!%$%k$,B8:_$7$J$$>l9g!"%H%C%W%Z!<%8$XLa$j$^$9!#(B
-\subsubsection{session\_end.inc}
-$B%;%C%7%g%s%U%!%$%k$r:o=|$7$^$9!#(B
-\subsubsection{value.inc}
-$B3F%G%#%l%/%H%j$H3X2J$NBP1~$dDj?t$,Dj5A$5$l$F$$$^$9!#(B
-\subsection{$B%G!<%?%U%!%$%k9=@.(B}
-$BK\>O$G$O!"%7%9%F%`$,%G!<%?$N3JG<$d=hM}$r9T$&%U%!%$%k$H%G%#%l%/%H%j$N9=@.$K$D$$$F<($9!#(B
-\subsubsection{data$B%G%#%l%/%H%j(B}
-data$B%G%#%l%/%H%j$K$O<B:]$K:n@.$5$l$?%G!<%?$,3JG<$5$l$F$$$^$9!#(B
 
-data$B%G%#%l%/%H%j0J2<$K$O3F3X2JKh$N%G%#%l%/%H%j$,$"$j!"3F3X2J$N%G%#%l%/%H%j$NFbIt$O(Bpdf$B%G%#%l%/%H%j!&(Bworkdir$B%G%#%l%/%H%j!&(Bxml$B%G%#%l%/%H%j$KJ,$+$l$F$$$^$9!#(B
-$B3F3X2JL>$H%G%#%l%/%H%j$H$NBP1~$O(Bvalue.inc$B$K5-=R$5$l$F$$$^$9!#(B
-\subsubsection{data/****/xml$B%G%#%l%/%H%j(B}
-xml$B%G%#%l%/%H%j$K$OF~NO2hLL$GF~NO$5$l$?3F2JL\$N>pJs$,2JL\Kh$KJ]B8$5$l$F$$$^$9!#(B
-\subsubsection{data/****/workdir$B%G%#%l%/%H%j(B}
-xml$B%G%#%l%/%H%j$K3JG<$5$l$?%G!<%?$r$b$H$K(Btex$B%U%!%$%k$r:n@.$7!"AH$_HG$9$k:n6H%G%#%l%/%H%j$G$9!#(B
+% ËÜÊ¸
+\section{ËÜ½ñ¤Ë¤Ä¤¤¤Æ}
+ËÜ½ñ¤Ï2009Ç¯ÅÙ¤Î¥·¥é¥Ð¥¹¥·¥¹¥Æ¥à¤ÎÆâÉôÀß·×½ñ¤Ç¤¹¡£
 
-\subsubsection{data/****/pdf$B%G%#%l%/%H%j(B}
-$B@8@.$5$l$?(Bpdf$B%U%!%$%k$,J]B8$5$l$k%G%#%l%/%H%j$G$9!#(B
+%% ¥Õ¥¡¥¤¥ëÇÛÃÖ¿Þ ¢¨¤¤¤é¤Ê¤¤
+%\section{¥Õ¥¡¥¤¥ëÇÛÃÖ¿Þ}
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[scale=0.33]{Syllabus.eps}
+%\caption{¥Õ¥¡¥¤¥ëÇÛÃÖ¿Þ}
+%\label{fig:file_list}
+%\end{center}
+%\end{figure}
 
-\subsubsection{css$B%G%#%l%/%H%j(B}
-\subsubsection{maintenance.css}
-change\_pass.php,chown\_class.php,delete\_class.php,delete\_user.php,regist\_class.php,regist\_user.php
-$B$G;HMQ$7$F$$$k(Bcss$B%U%!%$%k$G$9!#(B
-\subsubsection{edit.css}
-edit.php$B$G;HMQ$7$F$$$k(Bcss$B%U%!%$%k$G$9!#(B
-\subsubsection{top.css}
-index.php$B$G;HMQ$7$F$$$k(Bcss$B%U%!%$%k$G$9!#(B
-\subsubsection{SCS.css}
-view\_all\_class.php$B$H!"(Bview\_user\_class.php$B$G;HMQ$7$F$$$k(Bcss$B%U%!%$%k$G$9!#(B
-\subsubsection{use.css}
-use.html$B$G;HMQ$7$F$$$k(Bcss$B%U%!%$%k$G$9!#(B
-\section{$B%W%m%0%i%`%=!<%9(B}
-\subsection{$B%f!<%6Dj5A4X?t$H$=$N5!G=(B,$BF~=PNO(B}
-\subsubsection{change\_pass.php}
+% ¥×¥í¥°¥é¥à¾ðÊó
+\section{¥×¥í¥°¥é¥à¾ðÊó}\label{sec:program-information}
+°Ê²¼¤Ë¡¢¥·¥é¥Ð¥¹¥·¥¹¥Æ¥à¤Î³Æ¼ï¥×¥í¥°¥é¥à¥Õ¥¡¥¤¥ë¤Èµ¡Ç½¤Î³µÍ×¤ò¼¨¤·¤Þ¤¹¡£
+
+% PHP¥Õ¥¡¥¤¥ë
+\subsection{PHP¥Õ¥¡¥¤¥ë}\label{sec:php-file}
+
+\subsubsection{index.php}\label{sec:index-php}
+¥æ¡¼¥¶¡¼¡¦¥ë¡¼¥È¥æ¡¼¥¶¡¼¤¬¥í¥°¥¤¥ó¤·¤Æ¤Ê¤¤»þ¤Î¥È¥Ã¥×¥Ú¡¼¥¸¤Ç¤¹¡£
+¶µ°÷ID¤È¥Ñ¥¹¥ï¡¼¥É¤¬ÆþÎÏ¤µ¤ì¡¢Ç§¾Ú¥Ü¥¿¥ó¤¬²¡¤µ¤ì¤¿¤Ê¤é¤Ð¡¢
+$view\_user\_class.php$¥Õ¥¡¥¤¥ë¤Ë½èÍý¤¬°ú¤­·Ñ¤¬¤ì¤Þ¤¹¡£
+
+¤Þ¤¿¡¢¶µ°÷¤Î¿·µ¬ÅÐÏ¿¤Ë¤Ï$regist\_user\_class.php$¥Õ¥¡¥¤¥ë¡¢
+ÅÐÏ¿ºÑ¤ß²ÊÌÜ¤Î°ìÍ÷¤Ë¤Ï$view\_all\_class.php$¥Õ¥¡¥¤¥ë¤¬¥ê¥ó¥¯¤Ç¸Æ¤Ó½Ð¤µ¤ì¤Þ¤¹¡£
+
+\begin{itemize}
+\item »ÈÍÑ¥¹¥¿¥¤¥ë¥·¡¼¥È $top.css$
+\end{itemize}
+
+\subsubsection{view\_user\_class.php}\label{sec:view-user-class-php}
+¥æ¡¼¥¶¡¼¡¦¥ë¡¼¥È¥æ¡¼¥¶¡¼¤ÎÇ§¾Ú´ÉÍý¤ò¹Ô¤¤¤Þ¤¹¡£
+¥æ¡¼¥¶¡¼¤¬¥í¥°¥¤¥ó¤·¤Æ¤¤¤ë¤Ê¤é¤Ð¡¢¥æ¡¼¥¶¡¼¤¬Ã´Åö¤·¤Æ¤¤¤ë²ÊÌÜ¤Î°ìÍ÷¥Ú¡¼¥¸¤òÉ½¼¨¤·¤Þ¤¹¡£
+¥ë¡¼¥È¥æ¡¼¥¶¡¼¤¬¥í¥°¥¤¥ó¤·¤Æ¤¤¤ë¤Ê¤é¤Ð¡¢Á´¤Æ¤Î²ÊÌÜ°ìÍ÷¥Ú¡¼¥¸¤òÉ½¼¨¤·¤Þ¤¹¡£
+¥í¥°¥¤¥ó¤·¤Æ¤¤¤Ê¤¤¡¢¤â¤·¤¯¤ÏÇ§¾Ú¤Ë¼ºÇÔ¤·¤¿¥æ¡¼¥¶¡¼¤Ë¤Ï¥¨¥é¡¼¥á¥Ã¥»¡¼¥¸¤È¡¢ºÆÅÙ¥í¥°¥¤¥ó¤·¤ÆÄº¤¯¤¿¤á¤Ë¥È¥Ã¥×¥Ú¡¼¥¸¤Ø¤Î¥ê¥ó¥¯¤òÉ½¼¨¤·¤Þ¤¹¡£
+
+\begin{itemize}
+\item »ÈÍÑ¥¹¥¿¥¤¥ë¥·¡¼¥È $SCS.css$
+\end{itemize}
+
+\subsubsection{regist\_user.php}\label{sec:regist-user-php}
+¥æ¡¼¥¶¡¼¤ÎÄÉ²Ã½èÍý¤ò¹Ô¤¤¤Þ¤¹¡£
+ÅÐÏ¿¤¬Àµ¾ï¤Ë¹Ô¤ï¤ì¤¿¤Ê¤é¤Ð¡¢ÅÐÏ¿´°Î»¤Î¥á¥Ã¥»¡¼¥¸¤ÎÉ½¼¨¡¢²ÊÌÜ°ìÍ÷¥Ú¡¼¥¸¡¦¥È¥Ã¥×¥Ú¡¼¥¸¤Ø¤Î¥ê¥ó¥¯¤òÉ½¼¨¤·¤Þ¤¹¡£
+Àµ¾ï¤ËÅÐÏ¿¤¬¹Ô¤ï¤ì¤Ê¤«¤Ã¤¿¤È¤­¤Ï¡¢Á°²èÌÌ¤ØÌá¤ë¥ê¥ó¥¯¤òÉ½¼¨¤·¤Þ¤¹¡£
+
+\begin{itemize}
+\item »ÈÍÑ¥¹¥¿¥¤¥ë¥·¡¼¥È $maintenance.css$
+\end{itemize}
+
+\subsubsection{delete\_user.php}\label{sec:delete-user-php}
+¥æ¡¼¥¶¡¼¤Îºï½ü½èÍý¤ò¹Ô¤¤¤Þ¤¹¡£
+ºï½ü¤¹¤ëºÝ¤Ë¡¢¥æ¡¼¥¶¡¼¤Îxml¡¦pdf¥Õ¥¡¥¤¥ë¤âÆ±»þ¤Ëºï½ü¤¹¤ë¤«¤É¤¦¤«¿Ò¤Í¤Þ¤¹¡£
+Àµ¾ï¤Ëºï½ü¤µ¤ì¤¿¤È¤­¤Ï¡¢¥æ¡¼¥¶¡¼¤Ï¥È¥Ã¥×¥Ú¡¼¥¸¤Ø¤Î¡¢¥ë¡¼¥È¥æ¡¼¥¶¡¼¤ÏÁ´¤Æ¤Î²ÊÌÜ°ìÍ÷¥Ú¡¼¥¸¤Ø¤Î¥ê¥ó¥¯¤òÉ½¼¨¤·¤Þ¤¹¡£
+¶µ°÷¤¬ÁªÂò¤µ¤ì¤Æ¤Ê¤¤¤Ê¤É¡¢¥æ¡¼¥¶¡¼¤Îµ­ÆþÏ³¤ì¤¬¤¢¤ëºÝ¤ÏÁ°²èÌÌ¤ØÌá¤ë¤¿¤á¤Î¥ê¥ó¥¯¤òÉ½¼¨¤·¤Þ¤¹¡£
+
+\begin{itemize}
+\item »ÈÍÑ¥¹¥¿¥¤¥ë¥·¡¼¥È $maintenance.css$
+\end{itemize}
+
+\subsubsection{change\_pass.php}\label{sec:change-pass-php}
+¥æ¡¼¥¶¡¼¤Î¥Ñ¥¹¥ï¡¼¥É¤ÎÊÑ¹¹¤ò¹Ô¤¤¤Þ¤¹¡£¥ë¡¼¥È¥æ¡¼¥¶¡¼¤Ï¥Ñ¥¹¥ï¡¼¥É¤ÎÊÑ¹¹¤ò¹Ô¤¦¤³¤È¤¬½ÐÍè¤Þ¤»¤ó¡£¡ÊÂ¿Ê¬¡Ë
+Àµ¾ï¤ËÊÑ¹¹¤µ¤ì¤¿¤È¤­¤Ï²ÊÌÜ°ìÍ÷¥Ú¡¼¥¸¤Ø¤Î¥ê¥ó¥¯¤òÉ½¼¨¤·¤Þ¤¹¡£
+¥Ñ¥¹¥ï¡¼¥É¤¬ÆþÎÏ¤µ¤ì¤Æ¤Ê¤¤¡¢³ÎÇ§¤Î¥Ñ¥¹¥ï¡¼¥É¤¬°ìÃ×¤·¤Ê¤¤¡£¤³¤ì¤éÆó¤Ä¤Î¥¨¥é¡¼¤ÎºÝ¤Ë¤ÏÁ°²èÌÌ¤ØÌá¤ë¤¿¤á¤Î¥ê¥ó¥¯¤òÉ½¼¨¤·¤Þ¤¹¡£
+
+\begin{itemize}
+\item »ÈÍÑ¥¹¥¿¥¤¥ë¥·¡¼¥È $maintenance.css$
+\end{itemize}
+
+\subsubsection{regist\_class.php}\label{sec:regist-class-php}
+¿·¤·¤¤²ÊÌÜ¤ÎÅÐÏ¿¤ò¹Ô¤¤¤Þ¤¹¡£ÅÐÏ¿¤Ï²ÊÌÜ¤ÎÃ´Åö¶µ°÷¤¬¹Ô¤¤¤Þ¤¹¡£
+¥ë¡¼¥È¥æ¡¼¥¶¡¼¤¬¿·¤·¤¤²ÊÌÜ¤òÅÐÏ¿¤¹¤ë¤Ê¤é¤Ð¡¢$chown\_class.php$¤Ç²ÊÌÜ¤Î½êÍ­¼Ô¤òÊÑ¹¹¤·¤Ê¤¤¤È¥æ¡¼¥¶¡¼¤Ï»È¤¨¤Þ¤»¤ó¡£¡ÊÂ¿Ê¬¡Ë
+Àµ¾ï¤ËÅÐÏ¿¤µ¤ì¤¿¤È¤­¤Ï¡¢¤½¤Î²ÊÌÜ¤Îpdf¥Õ¥¡¥¤¥ë¤Î¸µ¤È¤Ê¤ëxml¥Õ¥¡¥¤¥ë¤òºîÀ®¤·¡¢²ÊÌÜ°ìÍ÷¥Ú¡¼¥¸¤Ø¤Î¥ê¥ó¥¯¤òÉ½¼¨¤·¤Þ¤¹¡£
+ÅÐÏ¿Ì¾¤¬ÆþÎÏ¤µ¤ì¤Æ¤Ê¤¤¾ì¹ç¤Ï¡¢¥¨¥é¡¼¥á¥Ã¥»¡¼¥¸¤È¡¢²ÊÌÜ°ìÍ÷¥Ú¡¼¥¸¤ØÌá¤ë¤¿¤á¤Î¤Î¥ê¥ó¥¯¤òÉ½¼¨¤·¤Þ¤¹¡£
+
+\begin{itemize}
+\item »ÈÍÑ¥¹¥¿¥¤¥ë¥·¡¼¥È $maintenance.css$
+\end{itemize}
+
+\subsubsection{delete\_class.php}\label{sec:delete-class-php}
+²ÊÌÜ¤Îºï½ü½èÍý¤ò¹Ô¤¤¤Þ¤¹¡£
+ºï½ü¤¹¤ëºÝ¤Ë³ÎÇ§¥Ú¡¼¥¸¤òÉ½¼¨¤·¤Þ¤¹¡£
+Àµ¾ï¤Ëºï½ü¤µ¤ì¤¿¤È¤­¤Ï¡¢²ÊÌÜ°ìÍ÷¥Ú¡¼¥¸¤Ø¤Î¥ê¥ó¥¯¤òÉ½¼¨¤·¤Þ¤¹¡£
+
+\begin{itemize}
+\item »ÈÍÑ¥¹¥¿¥¤¥ë¥·¡¼¥È $maintenance.css$
+\end{itemize}
+
+\subsubsection{edit.php}\label{sec:edit-php}
+ÁªÂò¤µ¤ì¤¿²ÊÌÜ¤Î¥·¥é¥Ð¥¹¤ÎÆâÍÆ¤òÊÔ½¸¤·¤Þ¤¹¡£
+Àµ¾ï¤ËÆâÍÆ¤¬ÊÑ¹¹¤µ¤ì¤¿¾ì¹ç¡¢ÂÐ±þ¤¹¤ëxml¥Õ¥¡¥¤¥ë¤ò¹¹¿·¤·¡¢pdf¥Õ¥¡¥¤¥ë¤ò¿·¤¿¤ËÀ¸À®¤·¤Þ¤¹¡£
+
+\begin{itemize}
+\item »ÈÍÑ¥¹¥¿¥¤¥ë¥·¡¼¥È $edit.css$
+\end{itemize}
+
+\subsubsection{chown\_class.php}\label{sec:chown-class-php}
+ÁªÂò¤µ¤ì¤¿²ÊÌÜ¤Î½êÍ­¼Ô¤òÊÑ¹¹¤·¤Þ¤¹¡£¤³¤ÎÊÑ¹¹¤Ï¥ë¡¼¥È¥æ¡¼¥¶¡¼¤Î¤ß¹Ô¤¦¤³¤È¤¬½ÐÍè¤Þ¤¹¡£
+
+\begin{itemize}
+\item »ÈÍÑ¥¹¥¿¥¤¥ë¥·¡¼¥È $maintenance.css$
+\end{itemize}
+
+\subsubsection{view\_all\_class.php}\label{sec:view-all-class-php}
+Á´¤Æ¤Î²ÊÌÜ¤Î¥·¥é¥Ð¥¹¥Õ¥¡¥¤¥ë¤Î¾õÂÖ¤ò³ÎÇ§¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+¤Þ¤¿¡¢´û¤ËºîÀ®¤µ¤ì¤Æ¤¤¤ëpdf¥Õ¥¡¥¤¥ë¤Ë¤â¥¢¥¯¥»¥¹¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+¤³¤Îµ¡Ç½¤ÏÌ¤¥í¥°¥¤¥ó¤Ç¤â»ÈÍÑ¤Ç¤­¤Þ¤¹¡£
+
+\begin{itemize}
+\item »ÈÍÑ¥¹¥¿¥¤¥ë¥·¡¼¥È $SCS.css$
+\end{itemize}
+
+\subsubsection{str2otf.php}\label{sec:str2otf-php}
+otf¤ÏÏÂÊ¸OpenType¥Õ¥©¥ó¥È¤ò°·¤¦¤¿¤á¤Î$Latex$¤Î¥Ñ¥Ã¥±¡¼¥¸¤Ç¤¹¡£
+¤³¤Î¥Õ¥¡¥¤¥ë¤Ï¡¢³ÆÊ¸»ú¤òotf¤Ç¤Î$UTF-8$¤ÎÉ½¼¨ÊýË¡¤Ç¤¢¤ë$\backslash UTF????$¤È¤¤¤¦·Á¼°¤ËÊÑ´¹¤¹¤ë¤¿¤á¤Î
+$str2otf$¤È¤¤¤¦´Ø¿ô¤òÄêµÁ¤·¤Æ¤¤¤Þ¤¹¡£
+
+% ¥»¥Ã¥·¥ç¥ó¥Õ¥¡¥¤¥ë
+\subsection{Session¥Õ¥¡¥¤¥ë}\label{sec:session-file}
+
+\subsubsection{session\_start.inc}\label{sec:sesion-start-inc}
+¥»¥Ã¥·¥ç¥ó¤ò³«»Ï¤·¤Þ¤¹¡£¥»¥Ã¥·¥ç¥óÌ¾¤Ïsyllabus¤Ç¤¹¡£
+
+\subsubsection{session\_check.inc}\label{sec:session-check-inc}
+¥»¥Ã¥·¥ç¥ó¥Õ¥¡¥¤¥ë¤¬ºîÀ®¤µ¤ì¤Æ¤Ê¤¤¥æ¡¼¥¶¡¼¡Ê¥í¥°¥¤¥ó¤·¤Æ¤¤¤Ê¤¤¥æ¡¼¥¶¡¼¡Ë¤Ï$index.php$¤Ë¥ê¥À¥¤¥ì¥¯¥È¤µ¤ì¤Þ¤¹¡£
+
+\subsubsection{session\_end.inc}\label{sec:session-end-inc}
+¥»¥Ã¥·¥ç¥ó¥Õ¥¡¥¤¥ë¤òºï½ü¤·¤Þ¤¹¡£¥»¥Ã¥·¥ç¥ó¥Õ¥¡¥¤¥ë¤È¶¦¤Ë¥¯¥Ã¥­¡¼¥Õ¥¡¥¤¥ë¤âºï½ü¤·¤Þ¤¹¡£
+
+% ÀßÄê¥Õ¥¡¥¤¥ë
+\subsection{ÀßÄê¥Õ¥¡¥¤¥ë}\label{sec:config-file}
+
+\subsubsection{value.inc}\label{sec:value-inc}
+³Æ¼ï¥Õ¥¡¥¤¥ë¤Ç»ÈÍÑ¤µ¤ì¤ëÊÑ¿ô¤òÄêµÁ¤·¤Æ¤¤¤Þ¤¹¡£ÄêµÁ°ìÍ÷
+
+\begin{itemize}
+\item ¥·¥é¥Ð¥¹¥·¥¹¥Æ¥à¤Î¥Ð¡¼¥¸¥ç¥ó¾ðÊó
+\item PHP¥Õ¥¡¥¤¥ë¡¢¥»¥Ã¥·¥ç¥ó¥Õ¥¡¥¤¥ë¡¢¥Ñ¥¹¥ï¡¼¥É¥Õ¥¡¥¤¥ë¤Î¥Õ¥¡¥¤¥ë¥Ñ¥¹
+\item ¥»¥Ã¥·¥ç¥ó¥¯¥Ã¥­¡¼¥Ñ¥¹
+\item communications = ¾ðÊóÄÌ¿®¹©³Ø²Ê¡¡¤Ê¤É¤Î¼Â³Ø²ÊÌ¾¤È¥×¥í¥°¥é¥àÃæ¤Ç»ÈÍÑ¤·¤Æ¤¤¤ë³Ø²ÊÌ¾¤È¤ÎÂÐ±þÉÕ¤±
+\end{itemize}
+
+% css¥Õ¥¡¥¤¥ë
+\subsection{CSS¥Õ¥¡¥¤¥ë}\label{sec:css-file}
+CSS¥Õ¥¡¥¤¥ë¥ê¥¹¥È
+
+\begin{itemize}
+\item edit.css
+\item maintenance.css
+\item SCS.css
+\item top.css
+\item use.css
+\end{itemize}
+
+³ÆCSS¥Õ¥¡¥¤¥ë¤ò»ÈÍÑ¤·¤Æ¤¤¤ëPHP¥Õ¥¡¥¤¥ë¤Ï¡¢\ref{sec:php-file}¾Ï¤Ëµ­½Ò¤·¤Æ¤¤¤Þ¤¹¡£
+
+% ¥Ç¡¼¥¿¥Õ¥¡¥¤¥ë¹½À®
+\section{¥Ç¡¼¥¿¥Õ¥¡¥¤¥ë¹½À®}\label{sec:data-file-composition}
+ËÜ¾Ï¤Ç¤Ï¡¢¥·¥¹¥Æ¥à¤¬¥Ç¡¼¥¿¤Î³ÊÇ¼¤ä½èÍý¤ò¹Ô¤¦¥Õ¥¡¥¤¥ë¤È¥Ç¥£¥ì¥¯¥È¥ê¤Î¹½À®¤Ë¤Ä¤¤¤Æ¼¨¤·¤Þ¤¹¡£
+
+\subsection{data¥Ç¥£¥ì¥¯¥È¥ê}\label{sec:data-dir}
+data¥Ç¥£¥ì¥¯¥È¥ê¤Ë¤Ï¼ÂºÝ¤ËºîÀ®¤µ¤ì¤¿¥Ç¡¼¥¿¤¬³ÊÇ¼¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+data¥Ç¥£¥ì¥¯¥È¥ê°Ê²¼¤Ë¤Ï³Æ³Ø²ÊËè¤Î¥Ç¥£¥ì¥¯¥È¥ê¤¬¤¢¤ê¡¢³Æ³Ø²Ê¤Î¥Ç¥£¥ì¥¯¥È¥ê¤ÎÆâÉô¤Ïpdf¥Ç¥£¥ì¥¯¥È¥ê¡¦workdir¥Ç¥£¥ì¥¯¥È¥ê¡¦xml¥Ç¥£¥ì¥¯¥È¥ê¤ËÊ¬¤«¤ì¤Æ¤¤¤Þ¤¹¡£
+³Æ³Ø²ÊÌ¾¤È¥Ç¥£¥ì¥¯¥È¥ê¤È¤ÎÂÐ±þ¤Ïvalue.inc¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+\subsection{data/****/xml¥Ç¥£¥ì¥¯¥È¥ê}\label{sec:xml-dir}
+xml¥Ç¥£¥ì¥¯¥È¥ê¤Ë¤ÏÆþÎÏ²èÌÌ¤ÇÆþÎÏ¤µ¤ì¤¿³Æ²ÊÌÜ¤Î¾ðÊó¤¬³Ø²ÊËè¤ËÊÝÂ¸¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+¤Þ¤¿¡¢³Ø²ÊËè¤Ë²ÊÌÜÌ¾¡¦½êÍ­¶µ°÷°ìÍ÷¤¬µ­½Ò¤µ¤ì¤¿list.txt¤âÊÝÂ¸¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+\subsection{data/****/workdir¥Ç¥£¥ì¥¯¥È¥ê}\label{sec:workd-dir}
+xml¥Ç¥£¥ì¥¯¥È¥ê¤Ë³ÊÇ¼¤µ¤ì¤¿¥Ç¡¼¥¿¤ò¸µ¤Ëtex¥Õ¥¡¥¤¥ë¤òºîÀ®¤·¡¢ÁÈÈÇ¤¹¤ëºî¶È¥Ç¥£¥ì¥¯¥È¥ê¤Ç¤¹¡£
+
+\subsection{data/****/pdf¥Ç¥£¥ì¥¯¥È¥ê}\label{sec:pdf-dir}
+À¸À®¤µ¤ì¤¿pdf¥Õ¥¡¥¤¥ë¤¬ÊÝÂ¸¤µ¤ì¤ë¥Ç¥£¥ì¥¯¥È¥ê¤Ç¤¹¡£
+
+% XSLT¥Õ¥¡¥¤¥ë
+\section{XSLT¥Õ¥¡¥¤¥ë}\label{sec:xslt-file}
+\subsection{syllabus\_pdf.xsl}\label{sec:syllabus-pdf-xsl}
+\ref{sec:xml-dir}¾Ï¤Îxml¥Õ¥©¥ë¥À¤ËÊÝÂ¸¤µ¤ì¤Æ¤¤¤ëxml¥Õ¥¡¥¤¥ë¤ò¡¢latex¤Ç°·¤¨¤ëtex¥Õ¥¡¥¤¥ë¤ËÊÑ´¹¤¹¤ë¤¿¤á¤Î¥ë¡¼¥ë¤òµ­½Ò¤·¤Æ¤¤¤Þ¤¹¡£
+
+% ¥Þ¥Ë¥å¥¢¥ë¥Õ¥¡¥¤¥ë
+\section{¥æ¡¼¥¶¡¼¥Þ¥Ë¥å¥¢¥ë}\label{sec:user-manual}
+\subsection{user.html}\label{sec:user-html}
+¥·¥é¥Ð¥¹¥·¥¹¥Æ¥à¤Î»ÈÍÑÊýË¡¤òµ­½Ò¤·¤Æ¤¤¤Þ¤¹¡£
+
+\newpage
+
+%% Ê¸»ú¥³¡¼¥ÉÁ«°Ü¿Þ¡¡¢¨¿Þ¤¬¤¢¤ë¤Ê¤é¤³¤³¤Ë¤¤¤ì¤è¤¦¤«¤Ê¤È¡£
+%\section{Ê¸»ú¥³¡¼¥ÉÁ«°Ü¿Þ}
+%¥·¥é¥Ð¥¹¥·¥¹¥Æ¥à¤Ç¤Ï¡¢xml¥Õ¥¡¥¤¥ë¤ätex¤ò°·¤¦¤Ë¤¢¤¿¤Ã¤Æ¡¢¤½¤ÎÅÔÅÙÅ¬ÀÚ¤ÊÊ¸»ú¥³¡¼¥É¤Ë¥¨¥ó¥³¡¼¥É¤·¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£°Ê²¼¤ËÊ¸»ú¥³¡¼¥ÉÁ«°Ü¿Þ¤ò¼¨¤·¤Þ¤¹¡£
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics{root1229883115.pdf}
+%\caption{Ê¸»ú¥³¡¼¥ÉÁ«°Ü¿Þ}
+%\label{fig:mozicode}
+%\end{center}
+%\end{figure}
+
+% ´Ø¿ô¥ê¥¹¥È
+\section{¥æ¡¼¥¶ÄêµÁ´Ø¿ô¤È¤½¤Îµ¡Ç½¡¢Æþ½ÐÎÏ}\label{sec:user-define-function}
+
+\subsection{view\_user\_class.php}
+\subsubsection{check\_password(\$password)}
+\begin{itemize}
+\item °ú¿ô
+
+\begin{description}
+\item[\$password] °Å¹æ²½¤µ¤ì¤¿¥Ñ¥¹¥ï¡¼¥É
+\end{description}
+
+\item µ¡Ç½
+
+¥æ¡¼¥¶¡¼¤¬ÆþÎÏ¤·¤¿¥Ñ¥¹¥ï¡¼¥É¤¬¡¢¥·¥é¥Ð¥¹¥·¥¹¥Æ¥à¤ËÅÐÏ¿¤·¤Æ¤¤¤ë¥Ñ¥¹¥ï¡¼¥É¤ÈÅù¤·¤¤¤«¥Á¥§¥Ã¥¯¤·¤Þ¤¹¡£
+
+\item Ìá¤êÃÍ
+
+Åù¤·¤±¤ì¤Ðtrue¡¢Åù¤·¤¯¤Ê¤±¤ì¤Ðfalse¤Ç¤¹¡£
+
+\end{itemize}
+
+%\subsubsection{makelist()}
+%\begin{itemize}
+
+%\item µ¡Ç½
+
+%\item Ìá¤êÃÍ
+
+%\end{itemize}
+
+%\subsubsection{list\_handle(\$depart, \$depart\_ja)}
+%\begin{itemize}
+%\item °ú¿ô
+%\begin{description}
+%\item[\$depart]
+%\item[\$depart\_ja]
+%\end{description}
+
+%\item µ¡Ç½
+
+%\item Ìá¤êÃÍ
+
+%\end{itemize}
+
+\subsection{regist\_user.php}
+
+\subsubsection{html\_top()}\label{sec:html-top}
+\begin{itemize}
+
+\item µ¡Ç½
+
+¥Ñ¥¹¥ï¡¼¥ÉÊÑ¹¹²èÌÌ¤Î¥È¥Ã¥×¥Ú¡¼¥¸¤òÉ½¼¨¤·¤Þ¤¹¡£
+
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsubsection{input\_check()}
+\begin{itemize}
+
+\item µ¡Ç½
+
+¥Ñ¥¹¥ï¡¼¥ÉÊÑ¹¹²èÌÌ¤Î¥È¥Ã¥×¥Ú¡¼¥¸¤ÇÆþÎÏ¤µ¤ì¤¿¥á¡¼¥ë¥¢¥É¥ì¥¹¤ä¥Ñ¥¹¥ï¡¼¥É¤¬Àµ¤·¤¯ÆþÎÏ¤µ¤ì¤Æ¤¤¤ë¤«È½Äê¤·¤Þ¤¹¡£
+¤â¤·¥¨¥é¡¼¤¬¤¢¤ë¾ì¹ç¤Ï\ref{sec:error}¾Ï¤Îerror()´Ø¿ô¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+
+\end{itemize}
+
 \subsubsection{make\_crypted\_pass()}
-$B0E9f2=$5$l$?%Q%9%o!<%I$r%Q%9%o!<%I%j%9%H%U%!%$%k$KDI2C$7$^$9!#(B
+\begin{itemize}
+
+\item µ¡Ç½
+
+¥æ¡¼¥¶¡¼¤¬ÆþÎÏ¤·¤¿¥Ñ¥¹¥ï¡¼¥É¤ò°Å¹æ²½¤·¡¢¥Ñ¥¹¥ï¡¼¥É¤òÊÝÂ¸¤·¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤Ë½ñ¤­¹þ¤ß¤Þ¤¹¡£
+
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+
+\end{itemize}
+
+\subsubsection{sorting\_passfile()}
+\begin{itemize}
+\item µ¡Ç½
+
+Á°¾Ï¤Ç½ñ¤­¹þ¤ó¤À¥Ñ¥¹¥ï¡¼¥ÉÊÝÂ¸¥Õ¥¡¥¤¥ë¤Î¥Ç¡¼¥¿¤òÌ¾Á°½ç¤Ç¥½¡¼¥È¤·¤Þ¤¹¡£
+
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
 \subsubsection{html\_out()}
-$B%Q%9%o!<%IJQ99$,@5>o$K40N;$7$?$3$H$r%f!<%6!<$KEA$($k%Z!<%8$rI=<($7$^$9!#(B
-\subsubsection{error()}
-$B0z?t(B error\_flag $B%Q%9%o!<%IF~NO$N:]$K%(%i!<$,H/@8$7$?>l9g$K%(%i!<FbMF$r(B
-$B%f!<%6!<$KEA$($k%Z!<%8$rI=<($7$^$9!#(B
+\begin{itemize}
 
-\subsubsection{chown\_class.php}
-\subsubsection{select\_page(\$selectclass, \$depart)}
-$B0z?t(B selectclass $B=jM-<T$rJQ99$7$?$$2JL\(B\\
-depart $B3X2JL>(B\\
-$B=jM-<T$rJQ99$9$k%Z!<%8$rI=<($7$^$9!#(B
+\item µ¡Ç½
 
-\subsubsection{change\_page()}
-$B=jM-<T$rJQ99$7!"(Bdata$B%U%)%k%@$N%U%!%$%k$rJQ99$7$^$9!#(B
+¥æ¡¼¥¶¡¼ÅÐÏ¿¤¬Àµ¾ï¤Ë¹Ô¤ï¤ì¤¿¸å¤Ë¡¢ÅÐÏ¿´°Î»¤Î¥á¥Ã¥»¡¼¥¸¤È¡¢¥È¥Ã¥×¥Ú¡¼¥¸¤ä²ÊÌÜ°ìÍ÷¥Ú¡¼¥¸¤Ø¤Î¥ê¥ó¥¯¤òÉ½¼¨¤·¤Þ¤¹¡£
+
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+
+\end{itemize}
+
+\subsubsection{error(\$error\_flag)}\label{sec:error}
+\begin{itemize}
+\item °ú¿ô
+
+\begin{description}
+\item[\$error\_flag] ¥æ¡¼¥¶¡¼ÅÐÏ¿¥Ú¡¼¥¸¤ÇÆþÎÏ¤µ¤ì¤¿ÆâÍÆ¤Ë¥¨¥é¡¼¤¬¤¢¤ë¾ì¹ç¡¢
+¥¨¥é¡¼ÆâÍÆ¤Ë±þ¤¸¤¿¥Õ¥é¥°¤¬¤³¤ÎÊÑ¿ô¤Ë¥»¥Ã¥È¤µ¤ì¤Þ¤¹¡£
+\end{description}
+
+\item µ¡Ç½
+
+°ú¿ô¤ÎÆâÍÆ¤«¤é¥¨¥é¡¼ÆâÍÆ¤òÈ½ÊÌ¤·¡¢¥¨¥é¡¼ÆâÍÆ¤òÁ´¤ÆÉ½¼¨¤·¤Þ¤¹¡£
+
+\item Ìá¤êÃÍ
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsection{delete\_user.php}
+
+\subsubsection{delete\_depart(\$depart, \$teacher)}
+\begin{itemize}
+\item °ú¿ô
+
+\begin{description}
+\item[\$depart] ¶µ°÷¤Î³Ø²ÊÌ¾
+\item[\$teacher]¡¡¶µ°÷¤ÎÌ¾Á°
+\end{description}
+
+\item µ¡Ç½
+
+¶µ°÷¤¬Ã´Åö¤·¤Æ¤¤¤ë²ÊÌÜ¤Îxml,pdf¥Õ¥¡¥¤¥ë¤òºï½ü¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+ºï½ü¤·¤¿¥Õ¥¡¥¤¥ë¤Î¥ê¥¹¥È
+\end{itemize}
 
 \subsubsection{make\_teacher\_list()}
-$B$"$k2JL\$N=jM-<T$rJQ99$7$?8e$G!"$=$N650w$,=jM-$7$F$$$k2JL\$N%j%9%H$rI=<($7$^$9!#(B
+\begin{itemize}
 
-\subsubsection{delete\_user.php}
-\subsubsection{make\_teacher\_list()}
-$B$"$k;HMQ<T$r:o=|$7$?$N$A!"(Broot$B$r=|$$$?;HMQ<T$N%j%9%H$rI=<($7$^$9!#(B
+\item µ¡Ç½
 
-\subsubsection{edit.php}
+ºï½ü¤¹¤ë¶µ°÷¤òÁªÂò¤¹¤ë¤¿¤á¤ÎHTML¤ò½ÐÎÏ¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsection{change\_pass.php}
+
+\subsubsection{html\_top()}
+\begin{itemize}
+
+\item µ¡Ç½
+
+¥Ñ¥¹¥ï¡¼¥ÉÊÑ¹¹¤Î¥á¥¤¥ó²èÌÌ¤òÉ½¼¨¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsubsection{input\_check()}
+\begin{itemize}
+
+\item µ¡Ç½
+
+¥Ñ¥¹¥ï¡¼¥ÉÊÑ¹¹¤Î¥á¥¤¥ó²èÌÌ¤ÇÆþÎÏ¤µ¤ì¤¿¥Ñ¥¹¥ï¡¼¥É¤¬¡¢¶õÇò¤Ç¤¢¤Ã¤¿¤ê¡¢
+ÆþÎÏ¥Ñ¥¹¥ï¡¼¥É¤È³ÎÇ§ÍÑ¥Ñ¥¹¥ï¡¼¥É¤¬°ã¤Ã¤Æ¤¤¤ì¤Ð¥¨¥é¡¼´Ø¿ô¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsubsection{make\_crypted\_pass()}
+\begin{itemize}
+
+\item µ¡Ç½
+
+¥Ñ¥¹¥ï¡¼¥É¤òÊÝÂ¸¤·¤Æ¤¤¤ë¥Õ¥¡¥¤¥ë¤«¤é¥æ¡¼¥¶¡¼¤Î¸Å¤¤¥Ñ¥¹¥ï¡¼¥É¤òÃµ¤·¡¢¿·¤·¤¤¥Ñ¥¹¥ï¡¼¥É¤ËÃÖ¤­´¹¤¨¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsubsection{html\_out()}
+\begin{itemize}
+
+\item µ¡Ç½
+
+¥Ñ¥¹¥ï¡¼¥ÉÊÑ¹¹´°Î»¥á¥Ã¥»¡¼¥¸¤ò¥Ú¡¼¥¸¤òÉ½¼¨¤·¤Þ¤¹¡£¤Þ¤¿¡¢²ÊÌÜ°ìÍ÷¥Ú¡¼¥¸¤Ø¤Î¥ê¥ó¥¯¤âÉ½¼¨¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsubsection{error(\$error\_flag)}
+\begin{itemize}
+\item °ú¿ô
+
+\begin{description}
+\item[\$error\_flag] ¥Ñ¥¹¥ï¡¼¥ÉÊÑ¹¹¥Ú¡¼¥¸¤ÇÆþÎÏ¤µ¤ì¤¿ÆâÍÆ¤Ë¥¨¥é¡¼¤¬¤¢¤ë¾ì¹ç¡¢
+¥¨¥é¡¼ÆâÍÆ¤Ë±þ¤¸¤¿¥Õ¥é¥°¤¬¤³¤ÎÊÑ¿ô¤Ë¥»¥Ã¥È¤µ¤ì¤Þ¤¹¡£
+\end{description}
+
+\item µ¡Ç½
+
+°ú¿ô¤ÎÆâÍÆ¤«¤é¥¨¥é¡¼ÆâÍÆ¤òÈ½ÊÌ¤·¡¢¥¨¥é¡¼ÆâÍÆ¤òÁ´¤ÆÉ½¼¨¤·¤Þ¤¹¡£¤Þ¤¿¡¢¸µ¤Î¥Ñ¥¹¥ï¡¼¥ÉÊÑ¹¹¥Ú¡¼¥¸¤Ø¤Î¥ê¥ó¥¯¤âÉ½¼¨¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsection{regist\_class.php}
+
+\subsubsection{xml\_ent(\$string)}
+\begin{itemize}
+\item °ú¿ô
+
+\begin{description}
+\item[\$string] ÅÐÏ¿¤µ¤ì¤¿²ÊÌÜ¤Îxml¥Õ¥¡¥¤¥ëÌ¾
+\end{description}
+
+\item µ¡Ç½
+
+¥Õ¥¡¥¤¥ëÌ¾¤Î'(¥·¥ó¥°¥ë¥³¡¼¥Æ¡¼¥·¥ç¥ó)¤òxml¤Ç°·¤¨¤ë¤è¤¦¤Ë\&apos; ¤ËÊÑ´¹¤·¤Þ¤¹¡£(Â¿Ê¬)
+\item Ìá¤êÃÍ
+
+ÊÑ´¹¸å¤Îxml¥Õ¥¡¥¤¥ëÌ¾¤Ç¤¹¡£
+\end{itemize}
+
+\subsection{edit.php}
+
 \subsubsection{write()}
-$B%U%)!<%`$K5-=R$5$l$?%G!<%?$r(BPOST$B$G<u$1<h$j!"(BXML$B%U%!%$%k$K=q$-9~$_$^$9!#(B
+\begin{itemize}
 
-\subsubsection{binarycheck()}
-XML$B$G;HMQ$G$-$kJ8;z%3!<%I$K%(%s%3!<%G%#%s%0$7$^$9!#(B
+\item µ¡Ç½
 
-\subsubsection{write\_print\_double(\$str)}
-$B0z?t(B str XML$B%U%!%$%k$K=q$-9~$`J8;zNs(B\\
-???
+¥æ¡¼¥¶¡¼¤¬¥·¥é¥Ð¥¹¥Õ¥¡¥¤¥ë¤òÊÔ½¸¸å¡¢¤½¤Î²ÊÌÜ¤Îxml¥Õ¥¡¥¤¥ë¤ò¹¹¿·¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsubsection{binarycheck(\$binary)}\label{sec:binarycheck}
+\begin{itemize}
+\item °ú¿ô
+
+\begin{description}
+\item[\$binary]¡¡ÊÔ½¸²èÌÌ¤ÇÆþÎÏ¤µ¤ì¤¿ÃÍ
+\end{description}
+
+\item µ¡Ç½
+
+latex¤Ç¤½¤Î¤Þ¤Þ¤Ç¤Ï°·¤¨¤Ê¤¤Ê¸»ú¤òlatex¤Ç°·¤¨¤ë·Á¼°¤Ë¡¢Ä´¤Ù¤Æ¤«¤éÃÖ¤­´¹¤¨¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+ÊÑ´¹¸å¤ÎÃÍ¡£
+\end{itemize}
+
+
+%\subsubsection{write\_print\_double(\$str)}
+%\begin{itemize}
+%\item °ú¿ô
+
+%\begin{description}
+%\item[\$str]
+%\end{description}
+
+%\item µ¡Ç½
+
+%\item Ìá¤êÃÍ
+
+%\end{itemize}
+
 
 \subsubsection{ed()}
-$B%7%i%P%9$NJT=8%Z!<%8$rI=<($7$^$9!#(B
+\begin{itemize}
+
+\item µ¡Ç½
+
+¥æ¡¼¥¶¡¼¤¬¥·¥é¥Ð¥¹¥Õ¥¡¥¤¥ë¤òÊÑ¹¹¤¹¤ë¤¿¤á¤ÎHTML¤ò½ÐÎÏ¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
 
 \subsubsection{changelist(\$name\_ja, \$endtype)}
-$B0z?t(B name\_ja $BC4Ev650w$NF|K\8lL>(B\\
-endtype ???\\
-???
+\begin{itemize}
+\item °ú¿ô
 
-\subsubsection{readvalue\_double(\$tag)}
-$B0z?t(B tag edit.php$B$GF~NO$5$l$?J8;zNs(B\\
-???
+\begin{description}
+\item[\$name\_ja]¡¡¹ÖµÁÌ¾
+\item[\$endtype]¡¡pdf¥Õ¥¡¥¤¥ë¤¬´°À®¤·¤Æ¤¤¤ë¤«("complete":´°À®, "":Ì¤´°À®)
+\end{description}
+
+\item µ¡Ç½
+
+\ref{sec:xml-dir}¾Ï¤Îlist.txt¥Õ¥¡¥¤¥ë¤ò¹¹¿·¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsubsection{getstate(\$simplefilename, \$depart)}
+\begin{itemize}
+\item °ú¿ô
+
+\begin{description}
+\item[\$simplefilename]¡¡ÊÔ½¸Ãæ¤Îxml¥Õ¥¡¥¤¥ëÌ¾
+\item[\$depart]¡¡³Ø²ÊÌ¾
+\end{description}
+
+\item µ¡Ç½
+
+ÊÔ½¸Ãæ¤Îxml¥Õ¥¡¥¤¥ë¤¬¾µÇ§ºÑ¤ß¤«Ì¤¾µÇ§¤«¤òÈ½ÊÌ¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¾µÇ§ºÑ¤ß¤Ê¤é"complete", Ì¤¾µÇ§¤Ê¤é"reserve"¤òÊÖ¤·¤Þ¤¹¡£
+\end{itemize}
+
+%\subsubsection{readvalue\_double(\$tag)}
+%\begin{itemize}
+%\item °ú¿ô
+
+%\begin{description}
+%\item[\$tag]
+%\end{description}
+
+%\item µ¡Ç½
+
+%\item Ìá¤êÃÍ
+
+%\end{itemize}
 
 \subsubsection{make\_pdf(\$depart, \$simplefilename)}
-$B0z?t(B depart $B3X2JL>(B\\
-simplefilename ???\\
-XML$B%U%!%$%k$+$i(Bpdf$B%U%!%$%k$r:n@.$7$^$9!#(B
+\begin{itemize}
+\item °ú¿ô
+
+\begin{description}
+\item[\$depart] ³Ø²ÊÌ¾
+\item[\$simplefilename] ÊÔ½¸Ãæ¤Îxml¥Õ¥¡¥¤¥ëÌ¾
+\end{description}
+
+\item µ¡Ç½
+
+ÊÔ½¸¤ò´°Î»¤·¤¿xml¥Õ¥¡¥¤¥ë¤«¤é¡¢pdf¥Õ¥¡¥¤¥ë¤òºîÀ®¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+pdf¥Õ¥¡¥¤¥ë¤ÎºîÀ®¤ËÀ®¸ù¤·¤¿¤é0, ºîÀ®¤Ë¼ºÇÔ¤·¤¿¤é1¤¬ÊÖ¤µ¤ì¤Þ¤¹¡£
+\end{itemize}
 
 \subsubsection{htmlSCU8(\$var)}
-$B0z?t(B var $BG$0U$NCM(B\\
-var$B$r(BHTML$B$G@5$7$/I=<($G$-$k$h$&$KJQ49$7$^$9!#(B
+\begin{itemize}
+\item °ú¿ô
+
+\begin{description}
+\item[\$var] xml¥Õ¥¡¥¤¥ë¤Ë³ÊÇ¼¤µ¤ì¤Æ¤¤¤ëÊ¸»ú¥³¡¼¥ÉEUC¤Î¾ðÊó
+\end{description}
+
+\item µ¡Ç½
+
+EUC¥³¡¼¥É¤òutf8¤ÎÊ¸»ú¥³¡¼¥É¤ËÊÑ´¹¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+ÊÑ´¹¸å¤ÎÊ¸»úÎó¤Ç¤¹¡£
+\end{itemize}
 
 \subsubsection{xml\_ent(\$string)}
-$B0z?t(B string $BG$0U$NJ8;zNs(B\\
-string$B$r(BHTML$B$G@5$7$/I=<(=PMh$k$h$&$KJQ49$7$^$9!#(B
+\begin{itemize}
+\item °ú¿ô
 
-\subsubsection{xmd\_ent\_de(\$string)}
-$B0z?t(B string $BG$0U$NJ8;zNs(B\\
-string$B$r%G%3!<%I$7$^$9!#(B
+\begin{description}
+\item[\$string]¡¡binarycheck¤Î°ú¿ô(\ref{sec:binarycheck})
+\end{description}
 
-\subsubsection{regist\_class.php}
-\subsubsection{xml\_ent(\$string)}
-$B0z?t(B string $BG$0U$NJ8;zNs(B\\
-$BG$0U$NJ8;zNs$r%(%s%3!<%I$7$^$9!#(B
+\item µ¡Ç½
 
+¥·¥ó¥°¥ë¥³¡¼¥Æ¡¼¥·¥ç¥ó(')¤òlatex¤Ç»È¤¨¤ë¤è¤¦¤Ë¡¢$\&apos;$¤ËÊÑ´¹¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+ÊÑ´¹¸å¤ÎÊ¸»úÎó¤Ç¤¹¡£
+\end{itemize}
 
 \subsubsection{xml\_ent\_de(\$string)}
-$B0z?t(B string $BG$0U$NJ8;zNs(B\\
-$BG$0U$NJ8;zNs$r%G%3!<%I$7$^$9!#(B
+\begin{itemize}
+\item °ú¿ô
 
+\begin{description}
+\item[\$string]¡¡ÆþÎÏ¤µ¤ì¤¿¹ÖµÁÌ¾¡ÊÆüËÜ¸ì¡Ë
+\end{description}
 
-\subsubsection{replacetext.php}
-\subsubsection{replaceText(\$str)}
-$B0z?t(B str $BG$0U$NJ8;zNs(B\\
-$BJ8;zNs$r%O%C%7%eI=$H>H$i$79g$o$;!"9gCW$9$l$PCV$-49$($^$9!#(B
+\item µ¡Ç½
 
+¹ÖµÁÌ¾¤ËÆþÎÏ¤µ¤ì¤Æ¤¤¤ë²ÄÇ½À­¤¬¤¢¤ë$\&apos;$¤òÃµ¤·¡¢$\backslash$' ¤ËÊÑ´¹¤·Ä¾¤·¤Þ¤¹¡£
 
-\subsubsection{str2otf.php}
-\subsubsection{str2otf(\$str)}
-$B0z?t(B str $BG$0U$NJ8;zNs(B\\
-???
+\item Ìá¤êÃÍ
 
-\subsubsection{ordUTF8(\$c, \$index)}
-$B0z?t(B c ???\\
-index ???\\
-???
+ÊÑ´¹¸å¤ÎÊ¸»úÎó¤Ç¤¹¡£
+\end{itemize}
 
+\subsection{chown\_class.php}
+
+\subsubsection{select\_page(\$selectclass, \$depart)}
+\begin{itemize}
+\item °ú¿ô
+
+\begin{description}
+\item[\$selectclass] ½êÍ­¼Ô¤òÊÑ¹¹¤·¤¿¤¤²ÊÌÜÌ¾
+\item[\$depart]¡¡³Ø²ÊÌ¾
+\end{description}
+
+\item µ¡Ç½
+
+²ÊÌÜ¤Î½êÍ­¶µ°÷¤ò·è¤á¤ë¥È¥Ã¥×¥Ú¡¼¥¸¤òÉ½¼¨¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsubsection{change\_page()}
+\begin{itemize}
+
+\item µ¡Ç½
+
+\ref{sec:xml-dir}¾Ï¤Î¥Ç¥£¥ì¥¯¥È¥êÆâ¤Ë¤¢¤ëlist.txt¤ÎÆâÍÆ¤ò¹¹¿·¤·¤Þ¤¹¡£
+¤Þ¤¿¡¢ÂÐ±þ¤¹¤ëxml¥Õ¥¡¥¤¥ë¤ÎÆâÍÆ¤â¹¹¿·¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsubsection{make\_teacher\_list()}
+\begin{itemize}
+
+\item µ¡Ç½
+
+½êÍ­¸¢ÊÑ¹¹¸å¤ÎHTML¤ò½ÐÎÏ¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
+
+¤¢¤ê¤Þ¤»¤ó¡£
+\end{itemize}
+
+\subsection{str2otf.php}
+
+%\subsubsection{str2otf(\$str)}
+%\begin{itemize}
+%\item °ú¿ô
+
+%\begin{description}
+%\item[\$str]
+%\end{description}
+
+%\item µ¡Ç½
+
+%\item Ìá¤êÃÍ
+
+%\end{itemize}
+
+%\subsubsection{ordUTF8(\$c, \$index = 0)}
+%\begin{itemize}
+%\item °ú¿ô
+
+%\begin{description}
+%\item[\$c]
+%\item[\$index = 0]
+%\end{description}
+
+%\item µ¡Ç½
+
+%\item Ìá¤êÃÍ
+
+%\end{itemize}
 
 
 \subsubsection{ChangeFlag(\&\$f)}
-$B0z?t(B f flag\\
-$B%U%i%0$rH?E>$5$;$k!#(B
+\begin{itemize}
+\item °ú¿ô
 
+\begin{description}
+\item[\&\$f] ¥Õ¥é¥°ÊÑ¿ô(0:¥Õ¥é¥°¤¬Î©¤Ã¤Æ¤¤¤Þ¤»¤ó, 1:¥Õ¥é¥°¤¬Î©¤Ã¤Æ¤¤¤Þ¤¹)
+\end{description}
 
-\subsubsection{view\_user\_class.php}
-\subsubsection{check\_password(\$password)}
-$B0z?t(B password $B%Q%9%o!<%I(B\\
-$B%Q%9%o!<%I$,@5$7$/F~NO$5$l$F$$$k$+%A%'%C%/$7$^$9!#(B
+\item µ¡Ç½
 
+¥Õ¥é¥°¤òÈ¿Å¾(0¤Ê¤é¤Ð1¤Ë¡¢1¤Ê¤é¤Ð0¤Ë)¤·¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+\item Ìá¤êÃÍ
 
-\subsubsection{makelist()}
-???
+¥Õ¥é¥°¤ÎÈ¿Å¾·ë²Ì¤Ç¤¹¡£
+\end{itemize}
 
-\subsection{$BDj?t0lMw(B}
-$BB8:_$7$^$;$s!#(Bvalue.inc$B$KJ#?t%Z!<%8$G;HMQ$9$kJQ?t$r5-=R$7$F$$$^$9!#(B
-\subsection{$BJQ?t0lMw(B}
-???
+% ¿÷·Á
+%\subsubsection{}
+%\begin{itemize}
+%\item °ú¿ô
+
+%\begin{description}
+%\item[]
+%\end{description}
+
+%\item µ¡Ç½
+
+%\item Ìá¤êÃÍ
+
+%\end{itemize}
+
 \end{document}
+
+%%% END_OF_FILE %%%

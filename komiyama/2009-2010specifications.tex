@@ -7,6 +7,47 @@
 \subsection*{本文書の概要}
 著者の独断と偏見による、シラバスシステムにおける仕様、及び今後の展望を記述するチラシの裏である。
 \section{システム概要}
+
+\subsection{半角文字の扱い}
+半角文字を正しく扱えるようにした。
+UTFの文字をpdfやdviに出力するためにotfパッケージを用いている。
+
+Vineのtexmacro-otfではうまくいかなかった(フォント)ため、
+http://mytexpert.sourceforge.jp/を参考にし、土村さん(http://www.nn.iij4u.or.jp/~tutimura/tex/ptex.html)のptex3をalphaにインストールしている。
+具体的には、tetex-texmf-3.0-1.noarch.rpm(tetex-texmf-3.0-1)とVine4-ptetex3-20071003-1.i386.rpm(ptetex3-20071003-1)である。
+
+またtexやxmlの記法にも対応している。
+文字列の変換について\ref{tab:strchange}に示す。
+\begin{table}
+\begin{center}
+\label{tab:strchange}
+\caption{文字変換表}
+\begin{tabular}{|c|c|c|c|} \hline
+ 入力& xml& str2otf.php&  (XSLT)tex\\ \hline\hline
+ $\langle$ & \&lt; & \$$\backslash$langle\$ & \$$\backslash$langle\$ \\ \hline
+ $\rangle$ & \&gt; & \$$\backslash$rangle\$ & \$$\backslash$rangle\$ \\ \hline
+ \& & \&amp; & $\backslash$\&amp; & $\backslash$\& \\ \hline
+ " & \&quot; & $\backslash$\&quot; & " \\ \hline
+ ' & \&apos; & $\backslash$\&apos; & ' \\ \hline
+ \# & \# & $\backslash$\# & $\backslash$\# \\ \hline
+ \$ & \$ & $\backslash$\$ & $\backslash$\$ \\ \hline
+ \% & \% & $\backslash$\% & $\backslash$\% \\ \hline
+ \_ & \_ & $\backslash$\_ & $\backslash$\_ \\ \hline
+ \{ & \{ & $\backslash$\{ & $\backslash$\{ \\ \hline
+ \} & \} & $\backslash$\} & $\backslash$\} \\ \hline
+ $\backslash$ & $\backslash$ & \$$\backslash$backslash\$ & \$$\backslash$backslash\$ \\ \hline
+ {-} & {-} & \{{-}\} & \{{-}\} \\ \hline
+ \~{} & \~{} & $\backslash$\~{}\{\} & $\backslash$\~{}\{\} \\ \hline
+ \^{} & \^{} & $\backslash$\^{}\{\} & $\backslash$\^{}\{\} \\ \hline
+ $*$ & $*$ & \$$*$\$ & \$$*$\$ \\ \hline
+ $|$ & $|$ & \$$|$\$ & \$$|$\$ \\ \hline
+ その他の&&&\\半角記号 & そのまま & そのまま & そのまま \\
+ 等&&&\\ \hline
+ 上記以外 & そのまま & $\backslash$\{\($unicodeの値$\)\} & $\backslash$\{\($unicodeの値$\)\} \\ \hline
+ \end{tabular}
+\end{center}
+\end{table}
+\newpage
 \section{画面遷移図と機能}
 %\section{ファイル配置}
 \section{処理}
@@ -104,22 +145,39 @@ requre & \$session\_start\_php、\$session\_check\_php、(\$session\_check\_php) \
  \item[管理者ユーザ] 
  フォームを出力
  \item[フォームデータ受信時] 
- \$\_POST[in]が1ならば、内容チェック、教員データ登録処理
+ \$\_POST[in]が1ならば、内容チェック、教員データ削除処理。
+ また\$\_POST[deleteflag]がcheckedならば、xml・pdfファイルも同時に削除する。
  \item[エラー時] 
- エラーメッセージを出力
+ エラーメッセージを出力。
 \end{description}
 \subsubsection{プログラムリスト}
 \begin{verbatim}
 
 \end{verbatim}
 
-ユーザーの削除処理を行います。
-削除する際に、ユーザーのxml・pdfファイルも同時に削除するかどうか尋ねます。
-正常に削除されたときは、ユーザーはトップページへの、ルートユーザーは全ての科目一覧ページへのリンクを表示します。
-教員が選択されてないなど、ユーザーの記入漏れがある際は前画面へ戻るためのリンクを表示します。
-
 \subsection{change\_pass.php}\label{sec:change-pass-php}
-ユーザーのパスワードの変更を行います。ルートユーザーはパスワードの変更を行うことが出来ません。（多分）
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & パスワード変更 \\ \hline
+requre\_once & \$value.inc  \\ \hline
+requre & \$session\_start\_php、\$session\_check\_php \\ \hline
+その他の関連ファイル & \$FILE\_PASSWD、\$FILE\_PASSWDNEW、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常] 
+ フォームを出力
+ \item[] 
+ \$\_POST[in]
+ \item[エラー時] 
+ エラーメッセージを出力。
+\end{description}
+\subsubsection{プログラムリスト}
+\begin{verbatim}
+
+\end{verbatim}
+
+ユーザーのパスワードの変更を行います。
 正常に変更されたときは科目一覧ページへのリンクを表示します。
 パスワードが入力されてない、確認のパスワードが一致しない。これら二つのエラーの際には前画面へ戻るためのリンクを表示します。
 

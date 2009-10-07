@@ -1,6 +1,6 @@
 \documentclass[titlepage]{jsarticle}
 \title{シラバスシステム引継文書(2009-2010)\\（途中経過報告編）}
-\author{シラバスシステム開発チーム2009 \\2008年度休学 小宮山}
+\author{岡山県立大学シラバス管理システム2009開発チーム\\2008年度休学 小宮山}
 \date{最終更新日:\today}
 \begin{document}
 \maketitle
@@ -132,6 +132,7 @@ rootでログインしたview\_user\_class.phpからのみに変更した。
 \begin{itemize}
  \item てきとーに教員IDの妥当性をチェック(エスケープ無しでファイル名に含められない文字をチェックしてるはず、たぶん)
  \item 科目名（ファイル名）に内部処理でのデリミタ「:」を含む場合の対応
+ \item 一応($\leftarrow$ここ重要)変数の整理。
  \item 他忘れた
 \end{itemize}
 \subsection{ドキュメントの作成}
@@ -153,7 +154,7 @@ rootでログインしたview\_user\_class.phpからのみに変更した。
  \item[セッション管理] 
  セキュリティの観点からは、httpsをサポートすべきである。
  \item[文字処理] 
- otfに頼らずにすむ文字は置換の対象外とすべきである。
+ otfパッケージに頼らずにすむ文字は置換の対象外とすべきである。
 \end{description}
 \subsection{その他}
 \begin{description}

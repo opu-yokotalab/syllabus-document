@@ -1,6 +1,6 @@
 \documentclass[a4j,12pt]{jsarticle}
 \title{シラバスシステム引継文書(2009-2010)\\（運用メモ編）}
-\author{シラバスシステム開発チーム2009　\\2008年度休学 小宮山}
+\author{岡山県立大学シラバス管理システム2009開発チーム\\2008年度休学 小宮山}
 \date{最終更新日:\today}
 \begin{document}
 \maketitle
@@ -15,17 +15,18 @@
  \item value.inc中の\$session\_cookie\_pathを変更
  \item data/passwd.txt.bacをdata/passwd.txtにリネーム
  \item 所有者と所有グループをapacheに変更
+ \item index.phpのtitleの西暦を書き直す
 \end{itemize}
 \section{運用}
 \subsection{運用前}
 横田先生に聞かれたら予算案を決定し請求する。予算は教授会？で最終決定する模様。今のところ例外なくそのまま通った。
-算出目安は全年度を参考。なお以前、情報通信工学科のみの時には総額8万を２～３人で割っていた。
+算出目安は前年度を参考。なお以前、情報通信工学科のみの時には総額8万を２～３人で割っていた。
 
 
 11月から1月頃まで、年次要求がばらばらと横田先生や教務委員の先生から降って来るので対応する。
 
 また、メーリングリストの準備を行う。
-/home/syllabus/に設定ファイルがありezmlm-
+/home/syllabus/に設定ファイルがありezmlm-sub等のコマンドを使い編集する。
 \subsection{運用期間開始}
 開始時間に、\~{}/public\_html/index.phpからindex.phpへリダイレクトするようにしておく。
 \subsection{一般教員入力期間中}

@@ -50,7 +50,25 @@ http://mytexpert.sourceforge.jp/を参考にし、土村さん(http://www.nn.iij4u.or.jp/~
 \newpage
 \section{画面遷移図と機能}
 %\section{ファイル配置}
-\section{処理}
+\section{技術情報}
+\subsection{セッション}
+\subsection{LaTexとPDF}
+\subsubsection{文字の扱いと組版}
+\subsubsection{otfパッケージ}
+\section{処理}% 設定ファイル
+\subsection{設定ファイル}\label{sec:config-file}
+
+\subsubsection{value.inc}\label{sec:value-inc}
+各種ファイルで使用される変数を定義しています。定義一覧
+
+\begin{itemize}
+\item シラバスシステムのバージョン情報
+\item PHPファイル、セッションファイル、パスワードファイルのファイルパス
+\item セッションクッキーパス
+\item communications = 情報通信工学科　などの実学科名とプログラム中で使用している学科名との対応付け
+\end{itemize}
+
+
 %\begin{center}
 %\begin{tabular}{|c|c|} \hline
 %処理概要 & \\ \hline
@@ -244,19 +262,6 @@ $str2otf$という関数を定義しています。
 
 \subsection{session\_end.inc}\label{sec:session-end-inc}
 セッションファイルを削除します。セッションファイルと共にクッキーファイルも削除します。
-
-% 設定ファイル
-\subsection{設定ファイル}\label{sec:config-file}
-
-\subsection{value.inc}\label{sec:value-inc}
-各種ファイルで使用される変数を定義しています。定義一覧
-
-\begin{itemize}
-\item シラバスシステムのバージョン情報
-\item PHPファイル、セッションファイル、パスワードファイルのファイルパス
-\item セッションクッキーパス
-\item communications = 情報通信工学科　などの実学科名とプログラム中で使用している学科名との対応付け
-\end{itemize}
 
 % cssファイル
 \subsection{CSSファイル}\label{sec:css-file}

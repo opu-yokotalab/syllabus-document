@@ -6,18 +6,33 @@
 \maketitle
 \subsection*{本文書の概要}
 著者の独断と偏見による、シラバスシステムにおける仕様、及び今後の展望を記述するチラシの裏である。
-\section{システム概要}
+\section{シラバスシステム概要}
+\subsection{概念}
+Webフォームから教員が入力を行い、シラバスのPDFを出力するシステム。
+%実際は禁止されている前年度データそのまま流用ができ、楽だから使いたいという予想も。
 
-\subsection{半角文字の扱い}
-半角文字を正しく扱えるようにした。
-UTFの文字をpdfやdviに出力するためにotfパッケージを用いている。
+%\subsubsection{データの扱い}
+システムダウン時には國島先生がxmlの変換を行いPDFをつくる、
+との前提により入力データを全て保持するために文字コードをUTF-8としたxmlを用いている。
+ただし、\ref{sec:formdata}%や\ref{sec:treat-single-byte-characters}
+も参照。
+%というか、数年前まで文字コードもEUC-JPだったし、
+%記号は全角に置き換え(しかも動いてなかったり、対応しきれていなかったり)してたし、文字コードとか関係ないんじゃ・・？
 
-Vineのtexmacro-otfではうまくいかなかった(フォント)ため、
-http://mytexpert.sourceforge.jp/を参考にし、土村さん(http://www.nn.iij4u.or.jp/~tutimura/tex/ptex.html)のptex3をalphaにインストールしている。
+xmlからtexの書式にxsltによりtexファイルを生成し、組版後Linuxのdvipdfmxコマンドによりpdfを生成する。
+%上記以外の機能は飾りです。偉い人にはわからんのです。
+
+
+\subsection{半角文字の扱い}\label{sec:treat-single-byte-characters}
+半角文字をxmlで正しく扱えるようにした。
+また、UTFの文字をpdfやdviに出力するためにotfパッケージを用いている。
+
+Vine4系のtexmacro-otfではうまくいかなかった(フォント)ため、
+http://mytexpert.sourceforge.jp/を参考にし、土村さん(http://www.nn.iij4u.or.jp/~tutimura/tex/ptetex.html)のptex3をalphaにインストールしている。
 具体的には、tetex-texmf-3.0-1.noarch.rpm(tetex-texmf-3.0-1)とVine4-ptetex3-20071003-1.i386.rpm(ptetex3-20071003-1)である。
 
 またtexやxmlの記法にも対応している。
-文字列の変換について\ref{tab:strchange}に示す。
+シラバス登録内容における文字列の変換について\ref{tab:strchange}に示す。
 \begin{table}
 \begin{center}
 \label{tab:strchange}
@@ -47,15 +62,13 @@ http://mytexpert.sourceforge.jp/を参考にし、土村さん(http://www.nn.iij4u.or.jp/~
  \end{tabular}
 \end{center}
 \end{table}
+更にこの対応からhtmlspecialcharsの仕様により、教科名に「\'」が使われた場合の処理が必要となった。
+この処理についてはhtmlspecialchars及びpreg\_replaceを用いた自作関数xml\_ent及びxml\_ent\_deで行っている。
+
 \newpage
 \section{画面遷移図と機能}
 %\section{ファイル配置}
-\section{技術情報}
-\subsection{セッション}
-\subsection{LaTexとPDF}
-\subsubsection{文字の扱いと組版}
-\subsubsection{otfパッケージ}
-\section{処理}% 設定ファイル
+\section{構成ファイル}
 \subsection{設定ファイル}\label{sec:config-file}
 
 \subsubsection{value.inc}\label{sec:value-inc}
@@ -67,7 +80,22 @@ http://mytexpert.sourceforge.jp/を参考にし、土村さん(http://www.nn.iij4u.or.jp/~
 \item セッションクッキーパス
 \item communications = 情報通信工学科　などの実学科名とプログラム中で使用している学科名との対応付け
 \end{itemize}
+\subsection{.htaccess}
+アクセス制限や、phpの設定を行っている。
 
+アクセス制限は運用に基づいて変更する。cronの利用もあり得る。
+
+phpの設定はphp.iniや各phpファイル中での設定、set\_ini()等でも可能である。
+%\begin{center}
+%\begin{tabular}{|c|c|} \hline
+%php\_value mbstring.http\_input pass & 入力データは手動処理\\ \hline
+%php\_value arg_separator.output \&amp; & 引数はアンパサampersandで区切る \\ \hline
+%php\_flag session.use\_only\_cookies Off & \\ \hline
+%php\_flag session.use\_trans\_sid 1 & \\ \hline
+%php\_value session.cache\_limiter none & \\ \hline
+%アクセス制限 & 必要に応じて\\ \hline
+%\end{tabluar}
+%\end{center}
 
 %\begin{center}
 %\begin{tabular}{|c|c|} \hline
@@ -105,7 +133,7 @@ requre & \$session\_start\_php、\$session\_end\_php \\ \hline
 \subsection{view\_user\_class.php}\label{sec:view-user-class-php}
 \begin{center}
 \begin{tabular}{|c|c|} \hline
-処理概要 & 一覧画面出力、各種メニュー表示、ログイン処理、 \\ \hline
+処理概要 & 一覧画面出力、各種メニュー表示、ログイン処理 \\ \hline
 requre\_once & value.inc  \\ \hline
 requre & \$session\_start\_php \\ \hline
 その他の関連ファイル & SCS.css \\ \hline
@@ -120,6 +148,28 @@ requre & \$session\_start\_php \\ \hline
  所有科目の一覧とメニューを出力
  \item[管理者ユーザ] 
  全科目一覧とメニュー、教員管理目メニューを出力
+\end{description}
+\subsubsection{プログラムリスト}
+\begin{verbatim}
+
+\end{verbatim}
+\subsection{edit.php}\label{sec:edit-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 内容入力・編集画面出力、 xml内容変更、\\
+ & xslt実行(tex生成)、組版(dvi生成)、pdf生成\\ \hline
+requre\_once & value.inc、str2otf.php  \\ \hline
+requre & \$session\_start\_php、\$session\_check\_php \\ \hline
+その他の関連ファイル & edit.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常] 
+ 編集フォーム出力
+ \item[フォームデータ受信] 
+ \$\_POST[\'mode\']がedならば、xml内容変更、xslt実行(tex生成)を行い、システムへ組版とpdf生成コマンドを投げる。その後生成結果を表示。
+ \item[エラー時] 
+ ログインし直してくださいというエラーページを出力。
 \end{description}
 \subsubsection{プログラムリスト}
 \begin{verbatim}
@@ -140,7 +190,7 @@ requre & \$session\_start\_php、\$session\_check\_php \\ \hline
  登録フォーム出力
  \item[フォームデータ受信時] 
  \$\_POST[in]が1ならば、内容チェック、教員データ登録処理
- \item[エラー時] 
+ \item[入力データエラー時] 
  エラーメッセージを出力
 \end{description}
 \subsubsection{プログラムリスト}
@@ -162,10 +212,10 @@ requre & \$session\_start\_php、\$session\_check\_php、(\$session\_check\_php) \
  アカウントチェック 
  \item[管理者ユーザ] 
  フォームを出力
- \item[フォームデータ受信時] 
+ \item[フォームデータ受信] 
  \$\_POST[in]が1ならば、内容チェック、教員データ削除処理。
- また\$\_POST[deleteflag]がcheckedならば、xml・pdfファイルも同時に削除する。
- \item[エラー時] 
+ また\$\_POST[deleteflag]がcheckedならば、xml、pdfファイルも同時に削除する。
+ \item[教員データ未選択時] 
  エラーメッセージを出力。
 \end{description}
 \subsubsection{プログラムリスト}
@@ -184,75 +234,121 @@ requre & \$session\_start\_php、\$session\_check\_php \\ \hline
 \end{center}
 \begin{description}
  \item[通常] 
- フォームを出力
- \item[フォームデータ受信時] 
- \$\_POST[in]が1の時に入力内容の確認、
- \item[エラー時] 
- エラーメッセージを出力。
+ユーザーのパスワードの変更フォームを出力
+ \item[フォームデータ受信]
+  \$\_POST[\'in\']が1のときに入力データのチェック
+ \item[受信データ不備]
+ エラーメッセージを出力 
 \end{description}
 \subsubsection{プログラムリスト}
 \begin{verbatim}
 
 \end{verbatim}
 
-ユーザーのパスワードの変更を行います。
-正常に変更されたときは科目一覧ページへのリンクを表示します。
-パスワードが入力されてない、確認のパスワードが一致しない。これら二つのエラーの際には前画面へ戻るためのリンクを表示します。
-
-\begin{itemize}
-\item 使用スタイルシート $maintenance.css$
-\end{itemize}
-
 \subsection{regist\_class.php}\label{sec:regist-class-php}
-新しい科目の登録を行います。登録は科目の担当教員が行います。
-ルートユーザーが新しい科目を登録するならば、$chown\_class.php$で科目の所有者を変更しないとユーザーは使えません。（多分）
-正常に登録されたときは、その科目のpdfファイルの元となるxmlファイルを作成し、科目一覧ページへのリンクを表示します。
-登録名が入力されてない場合は、エラーメッセージと、科目一覧ページへ戻るためののリンクを表示します。
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 新規科目登録 \\ \hline
+requre\_once & \$value.inc  \\ \hline
+requre & \$session\_start\_php、\$session\_check\_php\\ \hline
+その他の関連ファイル & list.txt(、list.new)、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常]
+ 科目登録フォームを出力 
+ \item[フォームデータ受信]
+ list.txtへの科目データ追加、当該科目のxml作成。
+ \item[科目名がない場合] 
+ エラーページを出力
+\end{description}
+\subsubsection{プログラムリスト}
+\begin{verbatim}
 
-\begin{itemize}
-\item 使用スタイルシート $maintenance.css$
-\end{itemize}
+\end{verbatim}
 
 \subsection{delete\_class.php}\label{sec:delete-class-php}
-科目の削除処理を行います。
-削除する際に確認ページを表示します。
-正常に削除されたときは、科目一覧ページへのリンクを表示します。
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 科目削除 \\ \hline
+requre\_once & \$value.inc  \\ \hline
+requre & \$session\_start\_php、\$session\_check\_php\\ \hline
+その他の関連ファイル & list.txt(、list.new)、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常]
+ 削除確認画面を出力
+ \item[フォームデータ受信時]
+ \$\_POST[\'mode\']がinternalであれば科目削除処理 
+ \item[引数なし]
+ open errorを表示。本来は\$departがない場合、科目が存在しない場合のエラー処理が必要。
+\end{description}
+\subsubsection{プログラムリスト}
+\begin{verbatim}
 
-\begin{itemize}
-\item 使用スタイルシート $maintenance.css$
-\end{itemize}
-
-\subsection{edit.php}\label{sec:edit-php}
-選択された科目のシラバスの内容を編集します。
-正常に内容が変更された場合、対応するxmlファイルを更新し、pdfファイルを新たに生成します。
-
-\begin{itemize}
-\item 使用スタイルシート $edit.css$
-\end{itemize}
+\end{verbatim}
 
 \subsection{chown\_class.php}\label{sec:chown-class-php}
-選択された科目の所有者を変更します。この変更はルートユーザーのみ行うことが出来ます。
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 科目所有者変更 \\ \hline
+requre\_once & \$value.inc  \\ \hline
+requre & \$session\_start\_php、\$session\_check\_php\\ \hline
+その他の関連ファイル & list.txt(、list.new)、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常]
+ 科目の所有教員変更フォームを出力
+ \item[フォームデータ受信時]
+ \$\_POST[\'mode\']がinternalであり、データが揃っていれば科目削除処理を行う。 
+ \item[引数なし]
+ エラーを表示。
+\end{description}
+\subsubsection{プログラムリスト}
+\begin{verbatim}
 
-\begin{itemize}
-\item 使用スタイルシート $maintenance.css$
-\end{itemize}
+\end{verbatim}
 
 \subsection{view\_all\_class.php}\label{sec:view-all-class-php}
-全ての科目のシラバスファイルの状態を確認することができます。
-また、既に作成されているpdfファイルにもアクセスすることができます。
-この機能は未ログインでも使用できます。
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 科目一覧出力 \\ \hline
+requre\_once & \$value.inc  \\ \hline
+requre & \\ \hline
+その他の関連ファイル & list.txt(、list.new)、SCS.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[全てのアクセス]
+ 全科目の一覧を表示し、pdfファイルへのリンクを提供する。
+\end{description}
+\subsubsection{プログラムリスト}
+\begin{verbatim}
 
-\begin{itemize}
-\item 使用スタイルシート $SCS.css$
-\end{itemize}
+\end{verbatim}
 
 \subsection{str2otf.php}\label{sec:str2otf-php}
-otfは和文OpenTypeフォントを扱うための$Latex$のパッケージです。
-このファイルは、各文字をotfでの$UTF-8$の表示方法である$\backslash UTF????$という形式に変換するための
-$str2otf$という関数を定義しています。
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & xmlから\LaTeX (otf)への文字列変換を行う。 \\ \hline
+requre\_once & \\ \hline
+requre & \\ \hline
+その他の関連ファイル & edit.php  \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[edit.phpから]
+ xmlのパースと文字の変換を行う。 
+\end{description}
+\subsubsection{プログラムリスト}
+\begin{verbatim}
+
+\end{verbatim}
 
 % セッションファイル
-\subsection{Sessionファイル}\label{sec:session-file}
+%\subsection{Sessionファイル}\label{sec:session-file}
 
 \subsection{session\_start.inc}\label{sec:sesion-start-inc}
 セッションを開始します。セッション名はsyllabusです。
@@ -276,6 +372,47 @@ CSSファイルリスト
 \end{itemize}
 
 
-\section{バグリスト}
+\section{既知のバグリスト}
+\begin{itemize}
+ \item エラー処理の不足
+ \item クオート関係の文字処理(texの歴史による部分)
+ \item pdfに出ない文字が存在する(フォントの不足)
+% \item 教員が未入力の場合PDF生成に失敗（対応済み）
+ \item 一度PDF生成に失敗するとxmlにアクセスできない。そのため１から入力し直しとなる
+% \item 何か書こうとしたけど忘れた。 × 沢山
+ \item workdirにファイルが溜まる。(残すようにしているだけ、コメントアウトを外す)
+ \item UTF-8の範囲外の機種依存文字には全く対応していない。携帯とか。%いらないけど
+ \item pdfに出ない文字が存在する(フォントの不足)
+\end{itemize}
 
+\section{改修予定候補リスト}
+\begin{itemize}
+ \item 一覧へ戻るリンク追加
+ \item texやフォントのアップデート
+ \item 科目の学科間コピー、移動機能
+ \item 新規科目登録時に所有教員を選択する機能(rootのみ)
+\end{itemize}
+
+\section{参考技術情報}
+\subsection{セッション}
+\subsection{\LaTeX とPDF}
+\subsubsection{文字の扱いと組版}
+\subsubsection{otfパッケージ}
+\subsection{フォームデータの文字コード}\label{sec:formdata}
+ブラウザから送られてくるデータの文字コードは不明である。
+
+例えば、form要素のaccept-charsetについてInternetExplorerが未対応という問題がある。
+
+
+
+%\subsubsection{きょうじゅかいのせんせいがたへ　おねがい}
+%\begin{itemize}
+% \item しごとは、はやめにください。のうきだけはやくしないでください。
+% \item しごとないようは、はやくかくていしてください。
+% \item てんぷれーとは、てふでください。わーどからかきなおすとかやりにくいです。
+% \item じょうほうは、はやめにください。
+% \item かえてほしいことは、はっきりいってください。
+% \item たんとうしゃをかいぎにださせないのは、こっかい、しぎかいくらいかとおもってました。いまだにおやくしょしごとなんですね。
+% \#まあ、ながばなしをきかされてもこまるだけですけどね。
+%\end{itemize}
 \end{document}

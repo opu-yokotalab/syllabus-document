@@ -6,7 +6,7 @@
 \begin{document}
 \maketitle
 \subsection*{本文書の概要}
-著者の独断と偏見による、シラバスシステムにおける仕様、及び今後の展望を記述するチラシの裏である。
+著者の独断と偏見による、シラバスシステムにおける仕様、及び今後の展望を記述する仕様書らしきチラシの裏である。
 \section{シラバスシステム概要}
 \subsection{概念}
 Webフォームから教員が入力を行い、シラバスのPDFを出力するシステム。
@@ -16,9 +16,9 @@ Webフォームから教員が入力を行い、シラバスのPDFを出力するシステム。
 システムダウン時には國島先生がxmlの変換を行いPDFをつくる、
 との前提により入力データを全て保持するために文字コードをUTF-8としたxmlを用いている。
 ただし、\ref{sec:formdata}%や\ref{sec:treat-single-byte-characters}
-も参照。
+も参照されたい。
 %というか、数年前まで文字コードもEUC-JPだったし、
-%記号は全角に置き換え(しかも動いてなかったり、対応しきれていなかったり)してたし、文字コードとか関係ないんじゃ・・？
+%記号は全角に置き換え(しかも動いてなかったり、対応しきれていなかったり)してたし、まず整形式ですらなかった気もするし、文字コードとか関係なかったんじゃ・・？
 
 xmlからtexの書式にxsltによりtexファイルを生成し、組版後Linuxのdvipdfmxコマンドによりpdfを生成する。
 %上記以外の機能は飾りです。偉い人にはわからんのです。
@@ -377,7 +377,7 @@ requre & \$session\_start\_php、\$session\_check\_php \\ \hline
  \item[通常] 
  編集フォーム出力
  \item[フォームデータ受信] 
- \$\_POST[\'mode\']がedならば、xml内容変更、xslt実行(tex生成)を行い、システムへ組版とpdf生成コマンドを投げる。その後生成結果を表示。
+ \$\_POST['mode']がedならば、xml内容変更、xslt実行(tex生成)を行い、システムへ組版とpdf生成コマンドを投げる。その後生成結果を表示。
  \item[エラー時] 
  ログインし直してくださいというエラーページを出力。
 \end{description}
@@ -446,7 +446,7 @@ requre & \$session\_start\_php、\$session\_check\_php \\ \hline
  \item[通常] 
 ユーザーのパスワードの変更フォームを出力
  \item[フォームデータ受信]
-  \$\_POST[\'in\']が1のときに入力データのチェック
+  \$\_POST['in']が1のときに入力データのチェック
  \item[受信データ不備]
  エラーメッセージを出力 
 \end{description}
@@ -490,7 +490,7 @@ requre & \$session\_start\_php、\$session\_check\_php\\ \hline
  \item[通常]
  削除確認画面を出力
  \item[フォームデータ受信時]
- \$\_POST[\'mode\']がinternalであれば科目削除処理 
+ \$\_POST['mode']がinternalであれば科目削除処理 
  \item[引数なし]
  open errorを表示。本来は\$departがない場合、科目が存在しない場合のエラー処理が必要。
 \end{description}
@@ -512,7 +512,7 @@ requre & \$session\_start\_php、\$session\_check\_php\\ \hline
  \item[通常]
  科目の所有教員変更フォームを出力
  \item[フォームデータ受信時]
- \$\_POST[\'mode\']がinternalであり、データが揃っていれば科目削除処理を行う。 
+ \$\_POST['mode']がinternalであり、データが揃っていれば科目削除処理を行う。 
  \item[引数なし]
  エラーを表示。
 \end{description}
@@ -573,13 +573,13 @@ CSSファイルリスト
 \begin{itemize}
  \item エラー処理の不足
  \item クオート関係の文字処理(texの歴史による部分)
- \item pdfに出ない文字が存在する(フォントの不足)
+% \item pdfに出ない文字が存在する(フォントの不足)
 % \item 教員が未入力の場合PDF生成に失敗（対応済み）
  \item 一度PDF生成に失敗するとxmlにアクセスできない。そのため一から再入力となる
 % \item 何か書こうとしたけど忘れた。 × 沢山
  \item workdirにファイルが溜まる。(残すようにしているだけ、コメントアウトを外す)
  \item UTF-8の範囲外の機種依存文字には全く対応していない。携帯とか。%いらないけど
- \item pdfに出ない文字が存在する(フォントの不足)
+ \item pdfに出ない文字が存在する(PDF(,dvi)用フォントの不足)
 \end{itemize}
 
 \section{改修予定候補リスト}
@@ -589,7 +589,7 @@ CSSファイルリスト
  \item 科目の学科間コピー、移動機能
  \item 新規科目登録時に所有教員を選択する機能(rootのみ)
  \item 任意の教員のパスワード変更機能(rootのみ)
- \item 所有者を削除してしまった科目の所有者変更機能(rootのみ)
+ \item 所有者を削除した科目の所有者変更機能(rootのみ)
 \end{itemize}
 \begin{figure}[hbtp]
    \centering
@@ -606,7 +606,9 @@ CSSファイルリスト
 \end{itemize}
 phpではファイルベースのセッションとなっている。ユーザエージェント(クライアント)上のクッキーに基づき、
 サーバ上(session.save\_path:/var/php5/session)のsession\_(セッションID、コンテンツ:ランダム文字列)というファイル
-の内容にセッション変数を書き込んで利用する形である。
+の内容にセッション変数を書き込んで利用する。
+%ヘッダ情報を出力(echoやprint等を)する前にセッションの処理をしなければならない。セッション変数は\$\_SESSION[変数名]でアクセス可能である。
+
 
 なお、本来はcookie必須としSSLと併せて利用するのがセキュリティ以上は望ましい。
 \subsection{\LaTeX とPDF}

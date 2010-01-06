@@ -331,8 +331,8 @@ view\_user\_class.phpでのログイン処理時にセッション変数に確認したfingerprintとの
 \begin{center}
 \begin{tabular}{|c|c|} \hline
 処理概要 & ログインフォームの出力、ログアウト処理\\ \hline
-requre\_once & value.inc  \\ \hline
-requre & \$session\_start\_php、\$session\_end\_php \\ \hline
+require\_once & value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_end\_php \\ \hline
 その他の関連ファイル & top.css \\ \hline
 \end{tabular}
 \end{center}
@@ -351,8 +351,8 @@ requre & \$session\_start\_php、\$session\_end\_php \\ \hline
 \begin{center}
 \begin{tabular}{|c|c|} \hline
 処理概要 & 一覧画面出力、各種メニュー表示、ログイン処理 \\ \hline
-requre\_once & value.inc  \\ \hline
-requre & \$session\_start\_php \\ \hline
+require\_once & value.inc  \\ \hline
+require & \$session\_start\_php \\ \hline
 その他の関連ファイル & SCS.css \\ \hline
 \end{tabular}
 \end{center}
@@ -375,8 +375,8 @@ requre & \$session\_start\_php \\ \hline
 \begin{tabular}{|c|c|} \hline
 処理概要 & 内容入力・編集画面出力、 xml内容変更、\\
  & xslt実行(tex生成)、組版(dvi生成)、pdf生成\\ \hline
-requre\_once & value.inc、str2otf.php  \\ \hline
-requre & \$session\_start\_php、\$session\_check\_php \\ \hline
+require\_once & value.inc、str2otf.php  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php \\ \hline
 その他の関連ファイル & edit.css \\ \hline
 \end{tabular}
 \end{center}
@@ -397,8 +397,8 @@ requre & \$session\_start\_php、\$session\_check\_php \\ \hline
 \begin{center}
 \begin{tabular}{|c|c|} \hline
 処理概要 & 新規教員の登録 \\ \hline
-requre\_once & \$value.inc  \\ \hline
-requre & \$session\_start\_php、\$session\_check\_php \\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php \\ \hline
 その他の関連ファイル & \$FILE\_PASSWD、\$FILE\_PASSWDNEW、maintenance.css \\ \hline
 \end{tabular}
 \end{center}
@@ -419,8 +419,8 @@ requre & \$session\_start\_php、\$session\_check\_php \\ \hline
 \begin{center}
 \begin{tabular}{|c|c|} \hline
 処理概要 & 教員の削除 \\ \hline
-requre\_once & \$value.inc  \\ \hline
-requre & \$session\_start\_php、\$session\_check\_php、(\$session\_check\_php) \\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php、(\$session\_check\_php) \\ \hline
 その他の関連ファイル & \$FILE\_PASSWD、\$FILE\_PASSWDNEW、maintenance.css \\ \hline
 \end{tabular}
 \end{center}
@@ -444,8 +444,8 @@ requre & \$session\_start\_php、\$session\_check\_php、(\$session\_check\_php) \
 \begin{center}
 \begin{tabular}{|c|c|} \hline
 処理概要 & パスワード変更 \\ \hline
-requre\_once & \$value.inc  \\ \hline
-requre & \$session\_start\_php、\$session\_check\_php \\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php \\ \hline
 その他の関連ファイル & \$FILE\_PASSWD、\$FILE\_PASSWDNEW、maintenance.css \\ \hline
 \end{tabular}
 \end{center}
@@ -466,8 +466,8 @@ requre & \$session\_start\_php、\$session\_check\_php \\ \hline
 \begin{center}
 \begin{tabular}{|c|c|} \hline
 処理概要 & 新規科目登録 \\ \hline
-requre\_once & \$value.inc  \\ \hline
-requre & \$session\_start\_php、\$session\_check\_php\\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php\\ \hline
 その他の関連ファイル & list.txt(、list.new)、maintenance.css \\ \hline
 \end{tabular}
 \end{center}
@@ -488,8 +488,8 @@ requre & \$session\_start\_php、\$session\_check\_php\\ \hline
 \begin{center}
 \begin{tabular}{|c|c|} \hline
 処理概要 & 科目削除 \\ \hline
-requre\_once & \$value.inc  \\ \hline
-requre & \$session\_start\_php、\$session\_check\_php\\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php\\ \hline
 その他の関連ファイル & list.txt(、list.new)、maintenance.css \\ \hline
 \end{tabular}
 \end{center}
@@ -510,8 +510,8 @@ requre & \$session\_start\_php、\$session\_check\_php\\ \hline
 \begin{center}
 \begin{tabular}{|c|c|} \hline
 処理概要 & 科目所有者変更 \\ \hline
-requre\_once & \$value.inc  \\ \hline
-requre & \$session\_start\_php、\$session\_check\_php\\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php\\ \hline
 その他の関連ファイル & list.txt(、list.new)、maintenance.css \\ \hline
 \end{tabular}
 \end{center}
@@ -532,8 +532,8 @@ requre & \$session\_start\_php、\$session\_check\_php\\ \hline
 \begin{center}
 \begin{tabular}{|c|c|} \hline
 処理概要 & 科目一覧出力 \\ \hline
-requre\_once & \$value.inc  \\ \hline
-requre & \\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \\ \hline
 その他の関連ファイル & list.txt(、list.new)、SCS.css \\ \hline
 \end{tabular}
 \end{center}
@@ -550,8 +550,8 @@ requre & \\ \hline
 \begin{center}
 \begin{tabular}{|c|c|} \hline
 処理概要 & xmlから\LaTeX (otf)への文字列変換を行う。 \\ \hline
-requre\_once & \\ \hline
-requre & \\ \hline
+require\_once & \\ \hline
+require & \\ \hline
 その他の関連ファイル & edit.php  \\ \hline
 \end{tabular}
 \end{center}

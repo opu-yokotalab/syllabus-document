@@ -235,7 +235,7 @@ PDFが存在しない場合は最終更新日は空欄としPDFへのリンクを提供しない。
 
 // バージョン。（レビジョンは遊び過ぎた？）
 $version = "1.12rev".abs(crc32("どうでもいいです、もう。"));//(主任談)
-//クッキーの有効範囲
+//セッションの有効範囲
 $session_cookie_path = "/~syllabus/syllabus2009/";
 
 
@@ -313,7 +313,7 @@ Vine4.2では以下のようにコメントアウトが必要。
 セッションを確認する処理をまとめたファイル。
 セッション中に利用するphpファイルはvalue.incの次にsession\_start.incとsession\_check.incを読み込めば良い。
 
-view\_user\_class.phpでのログイン処理時にセッション変数に確認したfingerprintとの一致を確認している。
+view\_user\_class.phpでのログイン処理時にセッション変数に設定したfingerprintとの一致を確認している。
 この確認により不正なアクセスをチェックしている。
 
 尚、fingerprintには本来はIP等を利用した方がよいが、利便性の観点から利用していない。

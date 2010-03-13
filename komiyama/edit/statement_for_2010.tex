@@ -1,0 +1,133 @@
+\documentclass[titlepage]{jsarticle}
+\usepackage{graphicx,color}%%ebbを実行とか、PDFをテキストエディタで開いてみてdvipdfmxのVオプションを実行するとかで、きっと幸せになれるよ？
+\title{シラバスシステム2010に関する声明}
+\author{岡山県立大学シラバス管理システム2010開発チーム\\2009年度M2 小宮山}
+\date{最終更新日:\today}
+\begin{document}
+\maketitle
+\subsection*{本文書の概要}
+小宮山の独断と偏見による、シラバスシステム2010における問題点、というか不満点をメモるチラシの裏である。
+\section{運用の問題}
+%一言で言えば担当者
+%%が不適格である。
+%の
+%能力不足である。
+%ここでいう能力とは、責任、リーダー、教育、実装、コミュニケーション、計画立案・実施、等の能力である。
+%以降では例を挙げてその問題点について述べる。
+
+\subsection{運用体制}
+\subsection{準備不足}
+\subsection{対応の遅れ}
+\subsection{報告}
+\subsection{相談}
+\subsection{釈明}
+\subsection{ドキュメント}
+\subsection{責任}
+\subsubsection{アクセスに関する問題}
+シラバスシステムでは、一般教員入力期間の後、教務委員による確認期間が設けられる。
+本案件はこの切り替え時に発生したものである。
+
+過年度では本切り替えをパスワードファイルをcronを用いて入れ替えることにより行っていた。
+この説明を岡崎君に行い、本年度はどうするのか運用開始前に確認したところ、学外からのアクセス制限を用いると追う返答であったので、
+再度確認したが、まだ運用期間(3日間)があり、その間に考えるため即答しないという趣旨の回答を得ていた。
+
+まず以下のメールが教務委員の榊原先生から届いた。
+\begin{quotation}
+\begin{verbatim}
+From	Katsumi Sakakibara <sakaki@c.oka-pu.ac.jp>
+To	syllabus-develop@dbmail.c.oka-pu.ac.jp
+日付	2010年1月9日7:47
+件名	シラバスシステムにアクセス
+
+シラバスシステム管理者様
+
+榊原です．シラバスシステムにアクセスできません．
+http://alpha.c.oka-pu.ac.jp/~syllabus/syllabus2010
+にアクセスすると
+Forbidden
+You don't have permission to access /~syllabus/syllabus2010 on this server.
+となります．早急にroot権限でのアクセスを許可してください．
+作業ができません．
+----
+\end{verbatim}
+\end{quotation}
+メールに記載されている状態は明らかに、アクセス制限を行ったことによるものである。これはこの前後の.htaccessの内容からも裏付けられている。
+\begin{quotation}
+\begin{verbatim}
+From	Katsumi Sakakibara <sakaki@c.oka-pu.ac.jp>
+To	syllabus-develop@dbmail.c.oka-pu.ac.jp
+日付	2010年1月9日7:55
+件名	FW: シラバスシステムにアクセス
+
+シラバスシステム管理者様
+
+榊原です．原因はわかりませんが，今現時点でアクセスできました．
+お騒がせしました．
+\end{verbatim}
+\end{quotation}
+このメールの前に.htaccessが再度変更されていることも確認している。
+本メールに対しては、謝罪と説明を行う必要があり、
+担当者からの報告をしばらく待っていた。しかし、報告がなく、どうなっているかを把握する必要性から以下のメールを出した。
+また、アクセス制限を単に解除しただけであるので、すべての教員がアクセス可能な状態になっていたためこれについても対応を促している。
+しかしこのメールに対するいかなる返答も受け取っていない。
+\begin{quotation}
+\begin{verbatim}
+From	satoru komiyama <komiyama@c.oka-pu.ac.jp>
+返信先	komiyama@c.oka-pu.ac.jp
+To	syllabus-devst@dbmail.c.oka-pu.ac.jp
+日付	2010年1月9日12:14
+件名	Re: FW: シラバスシステムにアクセス
+
+M2の小宮山です。
+
+教務委員の確認期間中は、アカウントはrootのみにする必要があるのではないでしょうか。
+また、やり取りの経過は関係者が把握する必要があるので明らかにしてください。
+****************************************************************
+岡山県立大学大学院
+情報系工学研究科　電子情報通信工学専攻
+知能メディア工学研究室
+ 小宮山　哲　　komiyama@c.oka-pu.ac.jp
+****************************************************************
+\end{verbatim}
+\end{quotation}
+その後も返答がないため、以下のメールを濱野君に出してもらった。
+\begin{quotation}
+\begin{verbatim}
+From	Hamano <hamano@c.oka-pu.ac.jp>
+To	syllabus-devst@dbmail.c.oka-pu.ac.jp
+日付	2010年1月13日17:08
+件名	シラバス運用に関して
+
+M1の濱野です。
+
+岡崎君へ
+シラバスの教務委員のチェック期間も終了したので、アクセス制限を変更する必要があると
+思うのですが、どうする予定なのでしょうか？
+
+また、1月9日の榊原先生からのメールに対する返事、原因、対処したことなどの報告をしてください。
+
+--
+岡山県立大学大学院
+情報系工学研究科電子情報通信工学専攻
+知能メディア工学研究室
+
+濱野　優輝
+
+\end{verbatim}
+\end{quotation}
+しかしこれに対する返答も未だなされていない。
+
+\subsection{雰囲気作り}
+\subsection{教育}
+\subsection{引き継ぎ}
+\subsection{能力}
+\section{未完了案件一覧}
+\begin{description}
+ \item[シラバス2009ドキュメント] 責任者：濱野または2009年度B3。2008年度末のシラバス2009では、ドキュメントの作成を業務として賃金が支払われたが完成していない。
+ \item[シラバスシステムユーザガイド] 作成：濱野。利用する先生向けマニュアル。必須ではないが未完成。
+ \item[Ruby on Railsによる実装] 担当：岡崎。一年以上前からするとは聞いているが未だに実装されていない。
+ \item[2010運用上発生した問題に対する対応報告] 報告者：岡崎。再三の催促にもかかわらず提出されていない。
+ \item[2010年度→2011年度シラバス文書] 担当：岡崎。2011年に向けたドキュメントを作成すべきである。
+\end{description}
+
+\end{document}

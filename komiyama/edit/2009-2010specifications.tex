@@ -578,15 +578,14 @@ CSSファイルリスト
 
 \section{既知のバグリスト}
 \begin{itemize}
- \item エラー処理の不足
- \item クオート関係の文字処理(texの歴史による部分)
-% \item pdfに出ない文字が存在する(フォントの不足)
+ \item エラー処理の不足。
+ \item クオート関係の文字処理(texの歴史による部分)。
 % \item 教員が未入力の場合PDF生成に失敗（対応済み）
- \item 一度PDF生成に失敗するとxmlにアクセスできない。そのため一から再入力となる
+ \item 一度PDF生成に失敗するとxmlにアクセスできない。そのため一から再入力となる。%失敗しないようにはしてあるはず。
 % \item 何か書こうとしたけど忘れた。 × 沢山
  \item workdirにファイルが溜まる。(残すようにしているだけ、コメントアウトを外す)
- \item UTF-8の範囲外の機種依存文字には全く対応していない。携帯とか。%いらないけど
- \item pdfに出ない文字が存在する(PDF(,dvi)用フォントの不足)
+ \item UTF-8の範囲外の機種依存文字には全く対応していない。携帯の絵文字とか。%いらないけど
+ \item pdfに出ない文字が存在する(PDF(,dvi)用フォントの不足)。
 \end{itemize}
 
 \section{改修予定候補リスト}
@@ -612,12 +611,12 @@ CSSファイルリスト
  \item http://www.asahi-net.or.jp/\~{}wv7y-kmr/memo/php\_security.html
 \end{itemize}
 phpではファイルベースのセッションとなっている。ユーザエージェント(クライアント)上のクッキーに基づき、
-サーバ上(session.save\_path:/var/php5/session)のsession\_(セッションID、コンテンツ:ランダム文字列)というファイル
-の内容にセッション変数を書き込んで利用する。
+サーバ上(session.save\_path:/var/php5/session)のsession\_(セッションID、
+コンテンツ:ランダム文字列)というファイルの内容にセッション変数を書き込んで利用する。
 %ヘッダ情報を出力(echoやprint等を)する前にセッションの処理をしなければならない。セッション変数は\$\_SESSION[変数名]でアクセス可能である。
 
 
-なお、本来はcookie必須としSSLと併せて利用するのがセキュリティ以上は望ましい。
+なお、本来はcookieを必須としSSLと併せて利用するのがセキュリティ上は望ましい。
 \subsection{\LaTeX とPDF}
 \begin{itemize}
  \item http://mytexpert.sourceforge.jp/

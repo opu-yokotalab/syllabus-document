@@ -1,0 +1,653 @@
+\documentclass[titlepage]{jsarticle}
+\usepackage{graphicx,color}%%ebbを実行とか、PDFをテキストエディタで開いてみてdvipdfmxのVオプションを実行するとかで、きっと幸せになれるよ？
+\title{シラバスシステム2011 仕様書}
+\author{岡山県立大学シラバス管理システム2011開発チーム\\2010年度D1 小宮山 哲}
+\date{最終更新日:\today}
+\begin{document}
+\maketitle
+\subsection*{本文書の概要}
+全学化での運用に伴う業者への委託を鑑み作成中のシラバスシステム仕様書。
+\section{シラバスシステム概要}
+\subsection{概念}
+Webフォームから教員が入力を行い、シラバスのPDFを出力するシステム。
+%実際は禁止されている前年度データそのまま流用ができ、楽だから使いたいという予想も。
+
+%\subsubsection{データの扱い}
+システムダウン時には國島先生がxmlの変換を行いPDFを生成する、
+との前提により入力データを全て保持するために文字コードをUTF-8としたxmlを用いている。
+ただし、\ref{sec:formdata}%や\ref{sec:treat-single-byte-characters}
+も参照されたい。
+%というか、perlのシステムの時は文字コードもEUC-JPだったし、
+%記号は全角に置き換え(しかも動いてなかったり、対応しきれていなかったり)してたし、
+%まず整形式ですらなかった気もするし、文字コードとか関係なかったんじゃ・・？
+
+xsltを用いてxmlファイルからtexファイルを生成し、組版後Linuxのdvipdfmxコマンドによりpdfを生成する。
+%上記以外の機能は飾りです。偉い人にはわからんのです。
+
+\subsection{動作環境}
+ptexlive2009及びphp5を必要とする。
+
+\subsection{文字の扱い}\label{sec:treat-single-byte-characters}
+
+\subsubsection{texやxmlの記法への対応}
+入力からPDF生成における文字列の変換について\ref{tab:strchange}に示す。
+\begin{table}
+\begin{center}
+\label{tab:strchange}
+\caption{文字変換表}
+\begin{tabular}{|c|c|c|c|} \hline
+ 入力& xml& str2otf.php&  (XSLT)tex\\ \hline\hline
+ $\langle$ & \&lt; & \$$\backslash$langle\$ & \$$\backslash$langle\$ \\ \hline
+ $\rangle$ & \&gt; & \$$\backslash$rangle\$ & \$$\backslash$rangle\$ \\ \hline
+ \& & \&amp; & $\backslash$\&amp; & $\backslash$\& \\ \hline
+ " & \&quot; & $\backslash$\&quot; & " \\ \hline
+ ' & \&apos; & $\backslash$\&apos; & ' \\ \hline
+ \# & \# & $\backslash$\# & $\backslash$\# \\ \hline
+ \$ & \$ & $\backslash$\$ & $\backslash$\$ \\ \hline
+ \% & \% & $\backslash$\% & $\backslash$\% \\ \hline
+ \_ & \_ & $\backslash$\_ & $\backslash$\_ \\ \hline
+ \{ & \{ & $\backslash$\{ & $\backslash$\{ \\ \hline
+ \} & \} & $\backslash$\} & $\backslash$\} \\ \hline
+ $\backslash$ & $\backslash$ & \$$\backslash$backslash\$ & \$$\backslash$backslash\$ \\ \hline
+ {-} & {-} & \{{-}\} & \{{-}\} \\ \hline
+ \~{} & \~{} & $\backslash$\~{}\{\} & $\backslash$\~{}\{\} \\ \hline
+ \^{} & \^{} & $\backslash$\^{}\{\} & $\backslash$\^{}\{\} \\ \hline
+ $*$ & $*$ & \$$*$\$ & \$$*$\$ \\ \hline
+ $|$ & $|$ & \$$|$\$ & \$$|$\$ \\ \hline
+ その他の&&&\\半角記号 & そのまま & そのまま & そのまま \\
+ 等&&&\\ \hline
+ 上記以外 & そのまま & $\backslash$\{\($unicodeの値$\)\} & $\backslash$\{\($unicodeの値$\)\} \\ \hline
+ \end{tabular}
+\end{center}
+\end{table}
+更にこの対応からphpのhtmlspecialchars()の仕様により、教科名に「'」が使われた場合の処理が必要となった。
+この処理についてはhtmlspecialchars()及びpreg\_replace()を用いた自作関数xml\_ent()及びxml\_ent\_de()で行っている。
+\newpage
+\section{画面遷移図と機能}
+
+\subsection{画面遷移図}
+\subsubsection{一般ユーザ}
+図\ref{f:STD}に一般ユーザの画面遷移を示す。
+\begin{figure}[hbtp]
+   \centering
+   \includegraphics[scale=0.4,bb=0 0 720 540]{ScreenTransitionDiagram.pdf}
+   \caption{画面遷移図(一般ユーザ)}
+   \label{f:STD}
+\end{figure}
+
+\subsubsection{管理者ユーザ}
+図\ref{f:STDr}に管理者ユーザ(root)の画面遷移を示す。
+\begin{figure}[hbtp]
+   \centering
+   \includegraphics[scale=0.4,bb=0 0 720 540]{ScreenTransitionDiagram-root.pdf}
+   \caption{画面遷移図(管理者ユーザ)}
+   \label{f:STDr}
+\end{figure}
+\subsection{機能}
+\subsubsection{トップページ(index.php)}
+教員IDとパスワードを入力し、認証ボタンを押すことでシステムへログインを行う。
+%認証処理自体はview_user_class.phpで行っている。%ここは仕変？
+認証に成功すれば所有科目一覧のページへ、失敗すればログインエラーのページを出力する。
+また、リセットボタンにより教員ID入力欄とパスワード入力欄の内容を全て消去することができる。
+%また、ログアウトの際にはログアウト処理も行う。
+
+また、使い方や全科目一覧へのリンクを提供する。
+さらにAcrobatReaderダウンロードページへのリンクも提供する。
+他にメーリングリストのアドレスをリンクとして提供する。
+
+\subsubsection{ログインエラー(view\_user\_class.php)}
+トップページからの認証に失敗した場合に出力する。
+エラーの内容出力、及びトップページへのリンクを提供する。
+
+\subsubsection{所有科目一覧(view\_user\_class.php)}
+所有科目の一覧を出力する。管理者ユーザの場合は全ての科目が一覧として出力される。
+
+各科目について編集画面、科目削除、PDFへのリンクを提供し、更新完了の状態を表示する。
+管理者ユーザには更に科目所有教員変更ページへのリンクを提供する。
+
+また、パスワード変更画面や新規科目登録へのリンクも提供する。ログアウトとしてトップページへのログアウト処理を含めたリンクも提供する。
+管理者ユーザには更に新規教員登録や教員削除へのリンクも提供する。
+
+\subsubsection{編集画面(edit.php)}
+シラバスの内容を編集する画面である。
+各項目の内容を入力し完了ボタンを押下することでPDF生成結果へ遷移する。
+
+全てやり直すボタンにより入力内容を全て最初の状態にリセットすることができる。
+
+入力項目を以下に示す。
+\begin{description}
+ \item[日本語科目名〈旧科目名〉]
+ 本内容が科目名となるため、本項目に変更により教科名の変更が可能である。
+ \item[英語科目名〈旧科目名〉] 
+ \item[担当教員] 
+ 非常勤の場合にはチェックボックスにチェックを入れる。非常勤のチェックがあれば自室番号はPDFに出力されない。
+ \item[担当教員への連絡先] 
+ \item[単位数] 
+ \item[対象学生]
+ 入学年度によって開講・非開講が左右される場合には、平成何年度以前(以後)入学生が対象かを入力する。 
+ \item[概略] 
+ \item[授業科目の目標] 
+ \item[履修上の注意] 履修の要件、及びその他を入力する。
+ \item[授業計画の記入方法] スケジュール形式あるいは自由形式を選択する。ここで選択された形式の入力欄の内容が授業計画として出力される。
+ \item[授業計画] 
+ \item[成績評価] 
+ \item[教材] 
+ \item[備考] 
+ \item[編集メニュー] 
+ 管理者ユーザへ入力が完了しているかどうかの意思を示すためのもの。一覧表示画面の完了・未完了を変更する。
+\end{description}
+入力項目は最も仕様が変更されてきた部分である。
+
+\subsubsection{PDF生成結果(edit.php)}
+PDFの生成に成功、あるいは失敗した結果を出力する。
+所有科目一覧へのリンクを提供する。
+
+\subsubsection{科目名入力画面(regist\_class.php)}
+新規科目の登録を行うための画面である。
+科目名を入力し、登録ボタンを押下することで結果確認画面へ遷移する。
+登録せずに前の画面に戻るボタンから所有科目一覧に戻ることができる。
+
+\subsubsection{結果確認画面(regist\_class.php)}
+成功した場合（新規科目名）を登録しましたと出力し、失敗した場合にはエラーの原因を出力する。
+また、所有科目一覧へのリンクを提供する。
+
+\subsubsection{科目削除確認画面(delete\_class.php)}
+科目を削除するための画面である。
+削除ボタンを押下することで結果確認画面へ遷移する。
+また、削除せずに前の画面に戻るボタンから所有科目一覧に戻ることができる。
+\subsubsection{結果確認画面(delete\_class.php)}
+%成功すれば
+（科目名）を削除しましたと出力し、所有科目一覧へのリンクを提供する。
+%失敗の処理はないｗ
+
+\subsubsection{パスワード変更画面(change\_passwd.php)}
+パスワードを変更するための画面である。
+新規パスワードを新パスワード欄と再入力欄に入力する。
+変更ボタンを押下することで結果確認ページへ遷移する。
+また、リセットボタンの押下により入力欄の内容を消去できる。
+\subsubsection{結果確認画面(change\_passwd.php)}
+成功した場合にはパスワードを変更しましたと出力し、所有科目一覧へのリンクを提供する。
+失敗した場合にはエラーの原因を出力し、パスワード変更画面へのリンクを提供する。%なんで所有科目一覧へ戻れないんじゃぁ～！！
+
+\subsubsection{新規教員登録(regist\_user.php)}
+新規に教員を登録するための管理者専用画面である。
+登録内容を教員ID欄とパスワード欄に入力する。
+登録ボタンを押すことで結果確認画面へ遷移する。
+また、リセットボタンを押下することで入力内容をすべて消去できる。
+\subsubsection{結果確認画面(regist\_user.php)}
+成功した場合には登録完了メッセージを出力し、所有科目一覧及びトップページへのリンクを提供する。%不要？
+失敗した場合には、エラー内容を出力し、新規教員登録画面へのリンクを提供する。%所有科目一覧へは戻られへんの？
+
+\subsubsection{教員削除(delete\_user.php)}
+登録済み教員を削除するための管理者専用画面である。
+ドロップダウンリストから削除する教員を選択する。所有ファイル（科目）も削除する場合にはチェックボックスにチェックを入れる。
+所有ファイルを削除しなかった場合には同一IDで登録することで利用することが可能である。%ユーザマニュアルに書くように＞万能濱野君
+%なして所有科目一覧へ(ry
+\subsubsection{結果確認画面(delete\_user.php)}
+成功すれば（教員ID）を削除しましたと出力し、所有科目一覧へのリンクを提供する。
+%なお、所有ファイルが残っていればアカウントのみ削除しましたという出力となる。
+教員が未選択の場合にはその旨をエラーメッセージとして出力し、所有科目一覧へのリンクを提供する。
+
+\subsubsection{科目所有教員変更(chown\_class.php)}
+科目の入力教員を変更するための管理者専用画面である。
+ドロップダウンリストから新たに科目を所有する教員IDを選択する。
+変更ボタンを押下することで結果確認ページへ遷移する。
+%所有科目一覧へ戻れない・・・
+\subsubsection{結果確認画面(chown\_class.php)}
+成功すれば所有者を変更しましたと出力し、所有科目一覧へのリンクを提供する。
+%失敗の処理はないｗ
+
+\subsubsection{全科目一覧(view\_all\_class.php)}
+全ての科目の一覧を提供する。
+各科目について科目名と教員ID、最終更新日を示し、PDFへのリンクを提供する。
+PDFが存在しない場合は最終更新日は空欄としPDFへのリンクを提供しない。
+トップページへのリンクを提供する。
+\subsubsection{PDF}
+教科毎に出力するPDFファイルである。
+これが最終的なシステムからの出力となる。
+\subsubsection{使い方注意事項(use.html)}
+使い方や注意事項を示す静的なページ。
+トップページへのリンクを提供する。
+
+
+%\section{ファイル配置}
+\section{構成ファイル}
+\subsection{設定ファイル}\label{sec:config-file}
+
+\subsubsection{value.inc}\label{sec:value-inc}
+シラバスシステムにおいて共通に使用する変数定義ファイルである。
+各phpにおいて初めに読み込み(require\_once)利用する。
+内容を以下に示す。
+\subsubsection*{内容}
+\begin{verbatim}
+<?php
+//phpの設定に関するコメント
+//(now configure in .htaccess, you can use set_ini(),or php.ini)
+//php_value mbstring.http_input pass
+//php_value arg_separator.output &amp;
+//php_flag session.use_only_cookies Off	#recommend On
+//php_flag session.use_trans_sid 1	#recommend 0
+//#php_flag session.cookie_httponly On	#recommend On
+//php_value session.cache_limiter none 
+
+// バージョン。（レビジョンは遊び過ぎた？）
+$version = "1.12rev".abs(crc32("どうでもいいです、もう。"));//(主任談)
+//セッションの有効範囲
+$session_cookie_path = "/~syllabus/syllabus2009/";
+
+
+// 各ファイル名の設定。ファイル名を変更した場合はここだけ変更すれば良い。
+$index_php = "./index.php";
+$edit_php = "./edit.php";
+$regist_user_php = "./regist_user.php";
+$delete_user_php = "./delete_user.php";
+$change_pass_php = "./change_pass.php";
+$regist_class_php = "./regist_class.php";
+$delete_class_php = "./delete_class.php";
+$view_user_class_php = "./view_user_class.php";
+$view_all_class_php = "./view_all_class.php";
+$chown_class_php = "chown_class.php";
+//セッション関連のファイル
+$session_start_php = "./session_start.inc";
+$session_check_php = "./session_check.inc";
+$session_end_php = "./session_end.inc";
+//パスワードファイルとその一時ファイル
+$FILE_PASSWD = "./data/passwd.txt";
+$FILE_PASSWDNEW = "./data/passwd.new";
+//学科名とディレクトリ名のハッシュテーブル
+$list_depart = array(	"communication" => "情報通信工学科",
+						//"systems" => "情報システム工学科",
+						"sports" => "スポーツシステム工学科",
+						"master-c" => "電子情報通信工学専攻",
+						"master-s" => "機械情報システム工学専攻",
+						"common" => "大学院共通科目",
+						"doctor" => "システム工学専攻");
+?>
+\end{verbatim}
+\subsection{.htaccess}
+アクセス制限や、phpの設定を行っている。
+アクセス制限は運用に基づいて変更を行う。これにはcronの利用もあり得る。
+phpの設定はphp.iniや各phpファイル中での設定、set\_ini()等でも可能である。
+%\begin{center}
+%\begin{tabular}{|c|c|} \hline
+%php\_value mbstring.http\_input pass & 入力データは手動処理\\ \hline
+%php\_value arg_separator.output \&amp; & 引数はアンパサampersandで区切る \\ \hline
+%php\_flag session.use\_only\_cookies Off & \\ \hline
+%php\_flag session.use\_trans\_sid 1 & \\ \hline
+%php\_value session.cache\_limiter none & \\ \hline
+%アクセス制限 & 必要に応じて\\ \hline
+%\end{tabluar}
+%\end{center}
+
+%\begin{center}
+%\begin{tabular}{|c|c|} \hline
+%処理概要 & \\ \hline
+%呼出元 & \ref{}\\ \hline
+%呼出先 & \ref{}\\ \hline
+%その他の関連ファイル & \ref{}\\ \hline
+%\end{tabular}
+%\end{center}
+%\subsubsection{説明}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+%
+%\end{verbatim}
+\subsection{php.ini}
+Vine4.2では以下のようにコメントアウトが必要。
+\begin{verbatim}
+;default charset=EUC-JP
+\end{verbatim}
+尚、設定の詳細は一緒にあるはずのphpinfo().htmを参考にすること。
+
+% セッションファイル
+\subsection{Sessionファイル}\label{sec:session-file}
+
+\subsubsection{session\_start.inc}\label{sec:sesion-start-inc}
+セッションを開始するための処理をまとめたファイル。
+セッション名をsyllabusとし、セッションの有効期限を0と指定することでブラウザを終了するまでとしている。%(確か)
+また、セッションクッキーパス(セッションが有効となる範囲)をvalue.incで定義した\$session\_cookie\_pathとしている。
+\subsubsection{session\_check.inc}\label{sec:session-check-inc}
+セッションを確認する処理をまとめたファイル。
+セッション中に利用するphpファイルはvalue.incの次にsession\_start.incとsession\_check.incを読み込めば良い。
+
+view\_user\_class.phpでのログイン処理時にセッション変数に設定したfingerprintとの一致を確認している。
+この確認により不正なアクセスをチェックしている。
+
+尚、fingerprintには本来はIP等を利用した方がよいが、利便性の観点から利用していない。
+またアクセスの度にセッションIDを作り直した方がセキュリティ上の観点からは好ましいが、この処理についても同様の理由から行っていない。
+
+\subsubsection{session\_end.inc}\label{sec:session-end-inc}
+ログアウト時や不正アクセス時にセッションを終了するための処理をまとめたファイル。
+
+セッション変数の削除及び
+クッキーの削除、%←なんかパス間違えて失敗してたけど
+セッションファイルの削除を行っている。
+% cssファイル
+
+\subsection{index.php}\label{sec:index-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & ログインフォームの出力、ログアウト処理\\ \hline
+require\_once & value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_end\_php \\ \hline
+その他の関連ファイル & top.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常] 
+ログイン画面を出力。
+ \item[ログアウト時] 
+\_GET[logout]がある場合、ログアウト処理
+\end{description}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+
+%\end{verbatim}
+
+\subsection{view\_user\_class.php}\label{sec:view-user-class-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 一覧画面出力、各種メニュー表示、ログイン処理 \\ \hline
+require\_once & value.inc  \\ \hline
+require & \$session\_start\_php \\ \hline
+その他の関連ファイル & SCS.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常] 
+ セッションチェック
+ \item[ログイン時] 
+ セッション変数のセットまたはセッションエラー処理
+ \item[一般ユーザ] 
+ 所有科目の一覧とメニューを出力
+ \item[管理者ユーザ] 
+ 全科目一覧とメニュー、教員管理目メニューを出力
+\end{description}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+
+%\end{verbatim}
+\subsection{edit.php}\label{sec:edit-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 内容入力・編集画面出力、 xml内容変更、\\
+ & xslt実行(tex生成)、組版(dvi生成)、pdf生成\\ \hline
+require\_once & value.inc、str2otf.php  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php \\ \hline
+その他の関連ファイル & edit.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常] 
+ 編集フォーム出力
+ \item[フォームデータ受信] 
+ \$\_POST['mode']がedならば、xml内容変更、xslt実行(tex生成)を行い、システムへ組版とpdf生成コマンドを投げる。その後生成結果を表示。
+ \item[エラー時] 
+ ログインし直してくださいというエラーページを出力。
+\end{description}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+
+%\end{verbatim}
+
+\subsection{regist\_user.php}\label{sec:regist-user-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 新規教員の登録 \\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php \\ \hline
+その他の関連ファイル & \$FILE\_PASSWD、\$FILE\_PASSWDNEW、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常] 
+ 登録フォーム出力
+ \item[フォームデータ受信時] 
+ \$\_POST[in]が1ならば、内容チェック、教員データ登録処理
+ \item[入力データエラー時] 
+ エラーメッセージを出力
+\end{description}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+
+%\end{verbatim}
+
+\subsection{delete\_user.php}\label{sec:delete-user-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 教員の削除 \\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php、(\$session\_check\_php) \\ \hline
+その他の関連ファイル & \$FILE\_PASSWD、\$FILE\_PASSWDNEW、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常]
+ アカウントチェック 
+ \item[管理者ユーザ] 
+ フォームを出力
+ \item[フォームデータ受信] 
+ \$\_POST[in]が1ならば、内容チェック、教員データ削除処理。
+ また\$\_POST[deleteflag]がcheckedならば、xml、pdfファイルも同時に削除する。
+ \item[教員データ未選択時] 
+ エラーメッセージを出力。
+\end{description}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+
+%\end{verbatim}
+
+\subsection{change\_pass.php}\label{sec:change-pass-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & パスワード変更 \\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php \\ \hline
+その他の関連ファイル & \$FILE\_PASSWD、\$FILE\_PASSWDNEW、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常] 
+ユーザーのパスワードの変更フォームを出力
+ \item[フォームデータ受信]
+  \$\_POST['in']が1のときに入力データのチェック
+ \item[受信データ不備]
+ エラーメッセージを出力 
+\end{description}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+
+%\end{verbatim}
+
+\subsection{regist\_class.php}\label{sec:regist-class-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 新規科目登録 \\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php\\ \hline
+その他の関連ファイル & list.txt(、list.new)、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常]
+ 科目登録フォームを出力 
+ \item[フォームデータ受信]
+ list.txtへの科目データ追加、当該科目のxml作成。
+ \item[科目名がない場合] 
+ エラーページを出力
+\end{description}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+
+%\end{verbatim}
+
+\subsection{delete\_class.php}\label{sec:delete-class-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 科目削除 \\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php\\ \hline
+その他の関連ファイル & list.txt(、list.new)、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常]
+ 削除確認画面を出力
+ \item[フォームデータ受信時]
+ \$\_POST['mode']がinternalであれば科目削除処理 
+ \item[引数なし]
+ open errorを表示。本来は\$departがない場合、科目が存在しない場合のエラー処理が必要。
+\end{description}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+
+%\end{verbatim}
+
+\subsection{chown\_class.php}\label{sec:chown-class-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 科目所有者変更 \\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \$session\_start\_php、\$session\_check\_php\\ \hline
+その他の関連ファイル & list.txt(、list.new)、maintenance.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[通常]
+ 科目の所有教員変更フォームを出力
+ \item[フォームデータ受信時]
+ \$\_POST['mode']がinternalであり、データが揃っていれば科目削除処理を行う。 
+ \item[引数なし]
+ エラーを表示。
+\end{description}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+
+%\end{verbatim}
+
+\subsection{view\_all\_class.php}\label{sec:view-all-class-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & 科目一覧出力 \\ \hline
+require\_once & \$value.inc  \\ \hline
+require & \\ \hline
+その他の関連ファイル & list.txt(、list.new)、SCS.css \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[全てのアクセス]
+ 全科目の一覧を表示し、pdfファイルへのリンクを提供する。
+\end{description}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+
+%\end{verbatim}
+
+\subsection{str2otf.php}\label{sec:str2otf-php}
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+処理概要 & xmlから\LaTeX (otf)への文字列変換を行う。 \\ \hline
+require\_once & \\ \hline
+require & \\ \hline
+その他の関連ファイル & edit.php  \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+ \item[edit.phpから]
+ xmlのパースと文字の変換を行う。 
+\end{description}
+%\subsubsection{プログラムリスト}
+%\begin{verbatim}
+
+%\end{verbatim}
+
+\subsection{CSSファイル}\label{sec:css-file}
+CSSファイルリスト
+
+\begin{itemize}
+\item edit.css
+\item maintenance.css
+\item SCS.css
+\item top.css
+\item use.css
+\end{itemize}
+
+
+\section{既知の不具合}
+\begin{itemize}
+ \item エラー処理の不足。
+ \item クオート関係の文字処理(texの歴史による部分)。
+% \item 教員が未入力の場合PDF生成に失敗（対応済み）
+ \item 一度PDF生成に失敗するとxmlにアクセスできない。そのため一から再入力となる。%失敗しないようにはしてあるはず。
+% \item 何か書こうとしたけど忘れた。 × 沢山
+ \item workdirにファイルが溜まる。(残すようにしているだけ、コメントアウトを外す)
+% \item UTF-8の範囲外の機種依存文字には全く対応していない。携帯の絵文字とか。unicodeが対応するらしいｗ
+ \item pdfに出ない文字が存在する(PDF(,dvi)用フォントの不足)。
+ \item フォントを埋め込んでいないため、和文フォント以外が必要になった場合には、
+ 追加の言語パックのダウンロードが必要となる。またそれらの文字を表示できないPDFビューワも存在する。
+\end{itemize}
+
+\section{改修候補リスト}
+\begin{itemize}
+ \item 図\ref{f:STDf}のように一覧へ戻るリンクを追加
+ \item texやフォントのアップデート
+ \item 科目の学科間コピー、移動機能
+ \item 新規科目登録時に所有教員を選択する機能(rootのみ)
+ \item 任意の教員のパスワード変更機能(rootのみ)
+ \item 所有者を削除した科目の所有者変更機能(rootのみ)
+\end{itemize}
+\begin{figure}[hbtp]
+   \centering
+   \includegraphics[scale=0.4,bb=0 0 720 540]{ScreenTransitionDiagram-future.pdf}
+   \caption{画面遷移図(理想)}
+   \label{f:STDf}
+\end{figure}
+
+\section{参考技術情報}
+\subsection{phpとセッション}
+\begin{itemize}
+ \item http://www.php.net/manual/ja/book.session.php
+ \item http://www.asahi-net.or.jp/\~{}wv7y-kmr/memo/php\_security.html
+\end{itemize}
+phpではファイルベースのセッションとなっている。ユーザエージェント(クライアント)上のクッキーに基づき、
+サーバ上(session.save\_path:/var/php5/session)のsession\_(セッションID、
+コンテンツ:ランダム文字列)というファイルの内容にセッション変数を書き込んで利用する。
+%ヘッダ情報を出力(echoやprint等を)する前にセッションの処理をしなければならない。セッション変数は\$\_SESSION[変数名]でアクセス可能である。
+
+
+なお、本来はcookieを必須としSSLと併せて利用するのがセキュリティ上は望ましい。
+\subsection{\LaTeX とPDF}
+\begin{itemize}
+ \item http://mytexpert.sourceforge.jp/
+\end{itemize}
+
+\subsubsection{文字の扱いと組版}
+\ref{sec:treat-single-byte-characters}を参照。
+\subsubsection{otfパッケージ}
+\begin{itemize}
+ \item http://oku.edu.mie-u.ac.jp/\~{}okumura/texwiki/?OTF
+\end{itemize}
+
+\subsection{フォームデータの文字コード}\label{sec:formdata}
+データの保持の観点からは入力から出力までunicodeで管理するのが望ましい。
+しかしながら現状ではフォームデータ受信時に文字コードの変換を行っている。
+
+理由としてはブラウザから送られてくるデータの文字コードは不明であることが挙げられる。
+例えば、form要素のaccept-charsetについてInternetExplorerが未対応という問題がある。
+%またaccept-charsetはW3Cの英語の解釈が誤解可能である(小宮山の私見)ことや、受け入れられる候補に過ぎないとの見方もあり、確実ではない。
+
+
+
+
+
+%\subsubsection{きょうじゅかいのせんせいがたへ　おねがい}
+%\begin{itemize}
+% \item しごとは、はやめにください。のうきだけはやくしないでください。
+% \item しごとないようは、はやくかくていしてください。
+% \item てんぷれーとは、てふでください。わーどからかきなおすとかやりにくいです。
+% \item じょうほうは、はやめにください。
+% \item かえてほしいことは、はっきりいってください。
+% \item たんとうしゃをかいぎにださせないのは、こっかい、しぎかいくらいかとおもってました。いまだにおやくしょしごとなんですね。
+% \#まあ、ながばなしをきかされてもこまるだけですけどね。
+%\end{itemize}
+\end{document}

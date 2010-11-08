@@ -1,0 +1,53 @@
+\documentclass[titlepage]{jsarticle}
+\usepackage{graphicx,color}%%ebbを実行とか、PDFをテキストエディタで開いてみてdvipdfmxのVオプションを実行するとかで、きっと幸せになれるよ？
+\title{シラバスシステム引継文書(2010-2011)\\（変更点概要編）}
+\author{岡山県立大学シラバス管理システム2009開発チーム\\2010年度D1 小宮山}
+\date{最終更新日:\today}
+\begin{document}
+\maketitle
+\subsection*{本文書の概要}
+本文書では、シラバスシステム2011における実装上の変更点について主に述べる。
+\section{変更点概要}
+\subsection{tex}
+ptex3からptexlive2009\cite{c:ptexlive}に変更を行った。
+\subsubsection{対応文字}
+OTFパッケージのUTF命令とUTFM命令を使い分けることで、
+繁体字や簡体字、ハングルや和文フォントの範囲以外の記号についても出力可能とした。
+\subsection{PDF生成成功判定}
+PDFファイルの更新時刻によりPDF生成成功判定を行うようにした。
+\section{tex}
+
+\section{対応文字}
+\subsection{ptexliveへの変更に付随するもの}
+UTFで記述したtexファイルをkanjiオプションなどを介さずそのまま扱えるようになった。
+これにより、OTFパッケージのUTF命令などを使わなくてもエラー無く組版することが可能になった。
+ただし、和文フォント以外の範囲にある文字については空白となってしまう。
+\subsection{CJK}
+従来の和文フォントの範囲以外にある簡体字や繁体字、ハングルや記号について
+PDFファイルにcidを用いて出力を可能にした。
+ただし、和文フォントの範囲以外の文字を表示するためには、
+Adobe Readerの場合)は言語パックのダウンロードが必要となる他、
+和文フォントのみしか表示できないビューワも存在する。
+\section{PDF成功判定}
+これまでは、dviファイルが生成されているかどうかによって、
+PDF生成の成功判定を行っていた。
+\section{他}
+\subsection{フォントマップ}
+教科名部分の太字を出す場合に、
+simplified Chinese {-}{-} sans serifに割り当てられている
+STHeitiStd-Regularで問題が発生する。
+そのためSTSong-Lightを割り当てるよう変更したotf-cktx.mapを
+dvipdfmxのfオプションで指定している。
+\subsection{パス}
+platex及びdvipdfmxのパスの指定をvalue.incで行うよう変更した。
+\subsection{年度指定}
+シラバスの年度をvalue.incで指定するよう変更した。
+
+\begin{thebibliography}{n}
+\bibitem{c:ptexlive} ptexlive wiki, http://tutimura.ath.cx/ptexlive/
+%\label{c:texlive}
+
+\bibitem{c:adobe-japan1.6} AdobeJapan1-6, http://partners.adobe.com/public/developer/en/font/5078.Adobe-Japan1-6.pdf
+%\labal{c:cjk}
+\end{thebibliography}
+\end{document}

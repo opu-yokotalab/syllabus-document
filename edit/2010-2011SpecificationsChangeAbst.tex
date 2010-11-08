@@ -9,14 +9,16 @@
 本文書では、シラバスシステム2011における実装上の変更点について主に述べる。
 \section{変更点概要}
 \subsection{tex}
-ptex3からptexlive2009\cite{c:ptexlive}に変更を行った。
+ptetex3からptexlive2009\cite{c:ptexlive}に変更を行った。
 \subsubsection{対応文字}
 OTFパッケージのUTF命令とUTFM命令を使い分けることで、
 繁体字や簡体字、ハングルや和文フォントの範囲以外の記号についても出力可能とした。
 \subsection{PDF生成成功判定}
 PDFファイルの更新時刻によりPDF生成成功判定を行うようにした。
 \section{tex}
-
+ptetex3の後継であるtexliveへ移行した。現段階で最新であるtexlive2009を使用している。
+本移行は、以前のシステムが稼働していたOS(Vine 4.2)のサポート終了を迎えたこと、
+及び学科のサーバ上での仮想マシンでの運用となることをを受けたものである。
 \section{対応文字}
 \subsection{ptexliveへの変更に付随するもの}
 UTFで記述したtexファイルをkanjiオプションなどを介さずそのまま扱えるようになった。
